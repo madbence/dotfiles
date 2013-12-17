@@ -1,0 +1,11 @@
+[alias]
+	civ = commit --interactive --verbose
+	purr = pull --rebase
+	lg = log --graph --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+[user]
+	name = Dányi Bence
+	email = madbence@gmail.com
+[color]
+	ui = true
+[core]
+	editor = vim
