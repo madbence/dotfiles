@@ -152,6 +152,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        position top
 }
 
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
