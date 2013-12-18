@@ -8,4 +8,4 @@
 [color]
 	ui = true
 [core]
-	editor = vim
+	editor = /Applications/MacVim.app/Contents/MacOS/Vim
