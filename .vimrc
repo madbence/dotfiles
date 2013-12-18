@@ -29,7 +29,7 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'dart-lang/dart-vim-plugin'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'http://github.com/sjl/gundo.vim.git'
+Bundle 'sjl/gundo.vim'
 
 " Enable filetype plugins
 filetype plugin on
