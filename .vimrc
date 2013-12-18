@@ -321,3 +321,6 @@ inoremap jj <ESC>
 
 " Gundo!
 nnoremap <F5> :GundoToggle<CR>
+
+" JS stuff
+let g:javascript_conceal = 1
