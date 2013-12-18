@@ -139,7 +139,11 @@ if has("gui_running")
   set guioptions=a
   set t_Co=256
   " set guifont=PragmataPro\ 20
-  set guifont=Ttyp0\ 8
+  if has("mac")
+    set guifont=Anonymous\ Pro\ for\ Powerline:h13
+  else
+    set guifont=Ttyp0\ 8
+  endif
   set guitablabel=%M\ %t
 endif
 
