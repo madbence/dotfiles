@@ -324,3 +324,6 @@ nnoremap <F5> :GundoToggle<CR>
 
 " JS stuff
 let g:javascript_conceal = 1
+
+" wow, such conceal, much level!
+set cole=2
