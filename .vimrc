@@ -156,9 +156,9 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Fancy statusline :3
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts=1
 let g:airline_theme='powerlineish'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
