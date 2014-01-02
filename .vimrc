@@ -326,3 +326,7 @@ nnoremap <F5> :GundoToggle<CR>
 " Sane indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" Show whitespace
+set list
+set listchars=tab:»·,trail:·,eol:
