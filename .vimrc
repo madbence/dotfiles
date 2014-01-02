@@ -31,6 +31,7 @@ Bundle 'dart-lang/dart-vim-plugin'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'sjl/gundo.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'w0ng/vim-hybrid'
 
 " Enable filetype plugins
 filetype plugin on
@@ -132,7 +133,7 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 " Enable syntax highlighting
 syntax enable
 
-colorscheme molokai
+colorscheme hybrid
 " set background=dark
 
 " Set extra options when running in GUI mode
