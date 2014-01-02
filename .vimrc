@@ -329,4 +329,4 @@ vnoremap > >gv
 
 " Show whitespace
 set list
-set listchars=tab:»·,trail:·,eol:
+set listchars=tab:»·,trail:·,eol:¬
