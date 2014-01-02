@@ -134,7 +134,7 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 syntax enable
 
 colorscheme hybrid
-" set background=dark
+set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
