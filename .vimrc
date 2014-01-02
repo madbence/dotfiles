@@ -323,3 +323,6 @@ inoremap jj <ESC>
 " Gundo!
 nnoremap <F5> :GundoToggle<CR>
 
+" Sane indenting
+vnoremap < <gv
+vnoremap > >gv
