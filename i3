@@ -78,27 +78,27 @@ bindsym $mod+a focus parent
 #bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+1 workspace 1: www
+bindsym $mod+2 workspace 2: chat
+bindsym $mod+3 workspace 3: dev
+bindsym $mod+4 workspace 4: vim
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+9 workspace 9: vlc
 bindsym $mod+odiaeresis workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+apostrophe move workspace 1
-bindsym $mod+Shift+quotedbl move workspace 2
-bindsym $mod+Shift+plus move workspace 3
-bindsym $mod+Shift+exclam move workspace 4
+bindsym $mod+Shift+apostrophe move workspace 1: www
+bindsym $mod+Shift+quotedbl move workspace 2: chat
+bindsym $mod+Shift+plus move workspace 3: dev
+bindsym $mod+Shift+exclam move workspace 4: vim
 bindsym $mod+Shift+percent move workspace 5
 bindsym $mod+Shift+slash move workspace 6
 bindsym $mod+Shift+equal move workspace 7
 bindsym $mod+Shift+parenleft move workspace 8
-bindsym $mod+Shift+parenright move workspace 9
+bindsym $mod+Shift+parenright move workspace 9: vlc
 bindsym $mod+Shift+Odiaeresis move workspace 10
 
 # reload the configuration file
