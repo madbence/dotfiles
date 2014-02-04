@@ -34,6 +34,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'w0ng/vim-hybrid'
 " Bundle 'benmills/vimux'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
 
 " Enable filetype plugins
 filetype plugin on
