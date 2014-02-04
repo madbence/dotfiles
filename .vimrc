@@ -145,6 +145,7 @@ if has("gui_running")
   " set guifont=PragmataPro\ 20
   if has("mac")
     set guifont=monoOne:h12
+    set noantialias
   else
     set guifont=Ttyp0\ 8
   endif
