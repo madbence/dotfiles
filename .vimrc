@@ -32,6 +32,8 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'sjl/gundo.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'w0ng/vim-hybrid'
+" Bundle 'benmills/vimux'
+Bundle 'jiangmiao/auto-pairs'
 
 " Enable filetype plugins
 filetype plugin on
