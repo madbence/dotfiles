@@ -101,6 +101,11 @@ bindsym $mod+Shift+parenleft move workspace 8
 bindsym $mod+Shift+parenright move workspace 9:vlc
 bindsym $mod+Shift+Odiaeresis move workspace 10
 
+# assign programs
+assign [class="Google-chrome"] → 1:www
+assign [class="Gvim"] → 4:vim
+assign [class="Vlc"] → 9:vlc
+
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
