@@ -1,7 +1,7 @@
 [alias]
 	civ = commit --interactive --verbose
 	purr = pull --rebase
-	lg = log --graph --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
 [user]
 	name = Bence Dányi
 	email = madbence@gmail.com
