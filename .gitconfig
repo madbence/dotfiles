@@ -15,3 +15,5 @@
 	autosqash = true
 [branch]
 	autosetuprebase = always
+[interactive]
+	singlekey = true
