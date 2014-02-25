@@ -8,7 +8,7 @@
 	name = Bence Dányi
 	email = madbence@gmail.com
 [color]
-	ui = true
+	ui = auto
 [core]
 	editor = vim
 [rebase]
