@@ -15,6 +15,8 @@ set $mod Mod4
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango:Ttyp0 8
 
+exec_always ~/.xsession
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
