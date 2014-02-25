@@ -2,10 +2,24 @@
 	civ = commit --interactive --verbose
 	purr = pull --rebase
 	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 [user]
 	name = Bence Dányi
 	email = madbence@gmail.com
 [color]
-	ui = true
+	ui = auto
 [core]
 	editor = /Applications/MacVim.app/Contents/MacOS/Vim
+[rebase]
+	autosqash = true
+[branch]
+	autosetuprebase = always
+[interactive]
+	singlekey = true
+[advice]
+	statusHints = false
+	pushNonFastForward = false
+[diff]
+	renames = copies
+	mnemonicprefix = true
