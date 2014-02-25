@@ -17,3 +17,6 @@
 	autosetuprebase = always
 [interactive]
 	singlekey = true
+[advice]
+	statusHints = false
+	pushNonFastForward = false
