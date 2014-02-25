@@ -13,3 +13,5 @@
 	editor = vim
 [rebase]
 	autosqash = true
+[branch]
+	autosetuprebase = always
