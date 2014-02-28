@@ -2,6 +2,8 @@
 	civ = commit --interactive --verbose
 	purr = pull --rebase
 	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+	co = checkout
+	cob = checkout -b
 [user]
 	name = Bence Dányi
 	email = madbence@gmail.com
@@ -9,3 +11,5 @@
 	ui = true
 [core]
 	editor = vim
+[push]
+	default = upstream
