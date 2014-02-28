@@ -4,12 +4,26 @@
 	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
 	co = checkout
 	cob = checkout -b
+	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 [user]
 	name = Bence Dányi
 	email = madbence@gmail.com
 [color]
-	ui = true
+	ui = auto
 [core]
 	editor = vim
 [push]
 	default = upstream
+[rebase]
+	autosqash = true
+[branch]
+	autosetuprebase = always
+[interactive]
+	singlekey = true
+[advice]
+	statusHints = false
+	pushNonFastForward = false
+[diff]
+	renames = copies
+	mnemonicprefix = true
