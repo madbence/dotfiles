@@ -2,6 +2,8 @@
 	civ = commit --interactive --verbose
 	purr = pull --rebase
 	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+	co = checkout
+	cob = checkout -b
 	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 	co = checkout
@@ -13,6 +15,8 @@
 	ui = auto
 [core]
 	editor = /Applications/MacVim.app/Contents/MacOS/Vim
+[push]
+	default = upstream
 [rebase]
 	autosqash = true
 [branch]
