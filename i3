@@ -155,6 +155,15 @@ bindsym Escape mode "default"
 
 bindsym $mod+r mode "resize"
 
+mode "move" {
+  bindsym Up move up 20px
+  bindsym Left move left 20px
+  bindsym Down move down 20px
+  bindsym Right move right 20px
+  bindsym Mod4+m mode "default"
+}
+
+bindsym Mod4+m focus floating; mode "move"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
