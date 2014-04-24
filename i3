@@ -200,3 +200,5 @@ bindsym Ctrl+Mod1+l exec i3lock -d
 
 # shutdown dialog
 # bindsym Ctrl+Mod1+Delete exec shutdown-dialog
+
+new_window pixel 2
