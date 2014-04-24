@@ -335,3 +335,5 @@ vnoremap > >gv
 " Show whitespace
 set list
 set listchars=tab:»·,trail:·,eol:¬
+
+set shell=bash
