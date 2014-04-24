@@ -196,7 +196,7 @@ bindsym Print exec gnome-screenshot -i
 workspace_auto_back_and_forth yes
 
 # lock screen 
-bindsym Ctrl+Mod1+l exec gnome-screensaver-command --lock
+bindsym Ctrl+Mod1+l exec i3lock -d
 
 # shutdown dialog
 # bindsym Ctrl+Mod1+Delete exec shutdown-dialog
