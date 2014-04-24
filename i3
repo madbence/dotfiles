@@ -13,7 +13,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Ttyp0 8
+font pango:Tewi 8
 
 exec_always ~/.xsession
 

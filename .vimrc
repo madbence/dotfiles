@@ -148,7 +148,8 @@ if has("gui_running")
   if has("mac")
     set guifont=monoOne:h12
   else
-    set guifont=Ttyp0\ 8
+    " set guifont=Ttyp0\ 8
+    set guifont=Tewi\ 8
   endif
   set guitablabel=%M\ %t
 endif
