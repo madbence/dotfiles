@@ -173,8 +173,8 @@ client.urgent           #383a3b #383a3b  #ee0000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        position top
+  status_command /home/picard/projects/fun/haskell/i3/status
+  position top
   colors {
     statusline  #999999
     background  #252525
