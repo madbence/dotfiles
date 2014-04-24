@@ -185,9 +185,9 @@ bar {
   }
 }
 
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volman/adjust 1 10
-bindsym XF86AudioMute exec --no-startup-id ~/.i3/volman/toggle 1
+# bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
+# bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volman/adjust 1 10
+# bindsym XF86AudioMute exec --no-startup-id ~/.i3/volman/toggle 1
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
@@ -199,4 +199,4 @@ workspace_auto_back_and_forth yes
 bindsym Ctrl+Mod1+l exec gnome-screensaver-command --lock
 
 # shutdown dialog
-bindsym Ctrl+Mod1+Delete exec shutdown-dialog
+# bindsym Ctrl+Mod1+Delete exec shutdown-dialog
