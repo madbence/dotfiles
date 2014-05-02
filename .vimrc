@@ -336,6 +336,7 @@ vnoremap > >gv
 set list
 set listchars=tab:»·,trail:·,eol:¬
 
+" Set shell to bash, because syntastic is not compatible with fish
 set shell=bash
 
 " Rainbow parens \o/
