@@ -34,6 +34,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
+" Bundle 'kien/rainbow_parentheses.vim'
 
 " Enable filetype plugins
 filetype plugin on
@@ -336,3 +337,9 @@ set list
 set listchars=tab:»·,trail:·,eol:¬
 
 set shell=bash
+
+" Rainbow parens \o/
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
