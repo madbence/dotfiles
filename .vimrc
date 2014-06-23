@@ -10,10 +10,10 @@ set modeline
 " required!
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 Bundle 'bling/vim-airline'
 " Bundle 'othree/html5.vim'
 Bundle 'tpope/vim-fugitive'
