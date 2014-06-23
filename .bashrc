@@ -112,5 +112,3 @@ fi
 TERM=xterm-256color
 
 # PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-
-. /home/lennon/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
