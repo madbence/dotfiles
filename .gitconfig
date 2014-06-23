@@ -1,29 +1,35 @@
 [alias]
-	civ = commit --interactive --verbose
-	purr = pull --rebase
-	lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
-	co = checkout
-	cob = checkout -b
-	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
-	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  civ = commit --interactive --verbose
+  purr = pull --rebase
+  lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
+  co = checkout
+  cob = checkout -b
+  fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+  co = checkout
+  cob = checkout -b
+  cot = checkout -b -t
+  prune-remote = !git remote | xargs -n 1 git remote prune
+  prune-local = !git branch --merged | grep -v '*' | grep -v master | grep -v development | xargs -n 1 git branch -d
+  cleanup = !git prune-remote && git prune-local
 [user]
-	name = Bence Dányi
-	email = madbence@gmail.com
+  name = Bence Dányi
+  email = bence@danyi.me
 [color]
-	ui = auto
+  ui = auto
 [core]
-	editor = vim
+  editor = vim
 [push]
-	default = upstream
+  default = upstream
 [rebase]
-	autosqash = true
+  autosqash = true
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [interactive]
-	singlekey = true
+  singlekey = true
 [advice]
-	statusHints = false
-	pushNonFastForward = false
+  statusHints = false
+  pushNonFastForward = false
 [diff]
-	renames = copies
-	mnemonicprefix = true
+  renames = copies
+  mnemonicprefix = true
