@@ -1,14 +1,15 @@
 [alias]
+  cb = rev-parse --abbrev-ref HEAD
   civ = commit --interactive --verbose
   purr = pull --rebase
+  p = push
+  pu = !git push -u origin $(git cb)
   lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
-  co = checkout
-  cob = checkout -b
   fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
   co = checkout
   cob = checkout -b
-  cot = checkout -b -t
+  cot = checkout -t
   prune-remote = !git remote | xargs -n 1 git remote prune
   prune-local = !git branch --merged | grep -v '*' | grep -v master | grep -v development | xargs -n 1 git branch -d
   cleanup = !git prune-remote && git prune-local
