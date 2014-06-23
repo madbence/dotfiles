@@ -15,26 +15,26 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
-Bundle 'othree/html5.vim'
+" Bundle 'othree/html5.vim'
 Bundle 'tpope/vim-fugitive'
 " Bundle 'airblade/vim-gitgutter'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
-Bundle 'godlygeek/csapprox'
+" Bundle 'godlygeek/csapprox'
 Bundle 'digitaltoad/vim-jade'
-Bundle 'ciaranm/detectindent'
+" Bundle 'ciaranm/detectindent'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
-Bundle 'dart-lang/dart-vim-plugin'
+" Bundle 'dart-lang/dart-vim-plugin'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'sjl/gundo.vim'
+" Bundle 'sjl/gundo.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'w0ng/vim-hybrid'
-" Bundle 'benmills/vimux'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
+" Bundle 'kien/rainbow_parentheses.vim'
 
 " Enable filetype plugins
 filetype plugin on
@@ -147,7 +147,8 @@ if has("gui_running")
   if has("mac")
     set guifont=monoOne:h12
   else
-    set guifont=Ttyp0\ 8
+    " set guifont=Ttyp0\ 8
+    set guifont=Tewi\ 8
   endif
   set guitablabel=%M\ %t
 endif
@@ -334,4 +335,5 @@ vnoremap > >gv
 set list
 set listchars=tab:»·,trail:·,eol:¬
 
+" Set shell to bash, because syntastic is not compatible with fish
 set shell=bash

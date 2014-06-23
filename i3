@@ -13,7 +13,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Ttyp0 8
+font pango:Tewi 8
 
 exec_always ~/.xsession
 
@@ -21,7 +21,7 @@ exec_always ~/.xsession
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -155,16 +155,39 @@ bindsym Escape mode "default"
 
 bindsym $mod+r mode "resize"
 
+mode "move" {
+  bindsym Up move up 20px
+  bindsym Left move left 20px
+  bindsym Down move down 20px
+  bindsym Right move right 20px
+  bindsym Mod4+m mode "default"
+}
+
+bindsym Mod4+m focus floating; mode "move"
+
+client.focused          #9fbc00 #9fbc00  #111111
+client.unfocused        #444444 #444444  #315858
+client.focused_inactive #444444 #444444  #2c2c2f
+client.urgent           #383a3b #383a3b  #ee0000
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        position top
+  status_command /home/picard/projects/fun/haskell/i3/status
+  position top
+  colors {
+    statusline  #999999
+    background  #252525
+    focused_workspace  #292929    #292929   #cccccc
+    active_workspace   #252525    #252525   #696f89
+    inactive_workspace #252525    #252525     #6b6b6b 
+    urgent_workspace   #252525    #252525   #c7a551
+  }
 }
 
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volman/adjust 1 10
-bindsym XF86AudioMute exec --no-startup-id ~/.i3/volman/toggle 1
+# bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
+# bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volman/adjust 1 10
+# bindsym XF86AudioMute exec --no-startup-id ~/.i3/volman/toggle 1
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
@@ -173,7 +196,9 @@ bindsym Print exec gnome-screenshot -i
 workspace_auto_back_and_forth yes
 
 # lock screen 
-bindsym Ctrl+Mod1+l exec gnome-screensaver-command --lock
+bindsym Ctrl+Mod1+l exec i3lock -d
 
 # shutdown dialog
-bindsym Ctrl+Mod1+Delete exec shutdown-dialog
+# bindsym Ctrl+Mod1+Delete exec shutdown-dialog
+
+new_window pixel 2
