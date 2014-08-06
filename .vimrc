@@ -337,3 +337,6 @@ set listchars=tab:»·,trail:·,eol:¬
 
 " Set shell to bash, because syntastic is not compatible with fish
 set shell=bash
+
+" ESlint as default linter for js
+let g:syntastic_javascript_checkers = ['eslint']
