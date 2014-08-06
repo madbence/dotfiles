@@ -29,7 +29,7 @@ end
 
 set PATH $HOME/.n/bin $PATH
 set PATH $HOME/.npm/bin $PATH
-set PATH $HOME/.texlive/bin/x86_64-linux $PATH
+set PATH $HOME/.texlive/2014/bin/x86_64-linux $PATH
 
 set -x EDITOR vim
 
