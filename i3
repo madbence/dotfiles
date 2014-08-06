@@ -192,7 +192,7 @@ bar {
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
-bindsym Print exec gnome-screenshot -i
+bindsym Print exec scrot -s
  
 workspace_auto_back_and_forth yes
 
