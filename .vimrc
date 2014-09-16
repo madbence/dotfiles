@@ -13,28 +13,31 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-Bundle 'gmarik/Vundle.vim'
-Bundle 'bling/vim-airline'
-" Bundle 'othree/html5.vim'
-Bundle 'tpope/vim-fugitive'
-" Bundle 'airblade/vim-gitgutter'
-Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'kien/ctrlp.vim'
-" Bundle 'godlygeek/csapprox'
-Bundle 'digitaltoad/vim-jade'
-" Bundle 'ciaranm/detectindent'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-repeat'
-" Bundle 'dart-lang/dart-vim-plugin'
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'sjl/gundo.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
-" Bundle 'kien/rainbow_parentheses.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'bling/vim-airline'
+" Plugin 'othree/html5.vim'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kien/ctrlp.vim'
+" Plugin 'godlygeek/csapprox'
+Plugin 'digitaltoad/vim-jade'
+" Plugin 'ciaranm/detectindent'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
+" Plugin 'dart-lang/dart-vim-plugin'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+" Plugin 'sjl/gundo.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Plugin 'vasconcelloslf/vim-interestingwords'
+Plugin 'fatih/vim-go'
+" Plugin 'kien/rainbow_parentheses.vim'
 
 " Enable filetype plugins
 filetype plugin on
@@ -340,3 +343,26 @@ set shell=bash
 
 " ESlint as default linter for js
 let g:syntastic_javascript_checkers = ['eslint']
+
+" Ignore node_modules
+let g:ctrlp_custom_ignore = 'node_modules'
+
+" Configure neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
