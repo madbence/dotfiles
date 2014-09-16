@@ -87,7 +87,7 @@ bindsym $mod+4 workspace 4:vim
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
+bindsym $mod+8 workspace 8:spotify
 bindsym $mod+9 workspace 9:vlc
 bindsym $mod+odiaeresis workspace 10
 
@@ -99,7 +99,7 @@ bindsym $mod+Shift+exclam move workspace 4:vim
 bindsym $mod+Shift+percent move workspace 5
 bindsym $mod+Shift+slash move workspace 6
 bindsym $mod+Shift+equal move workspace 7
-bindsym $mod+Shift+parenleft move workspace 8
+bindsym $mod+Shift+parenleft move workspace 8:spotify
 bindsym $mod+Shift+parenright move workspace 9:vlc
 bindsym $mod+Shift+Odiaeresis move workspace 10
 
