@@ -27,6 +27,8 @@ function fish_prompt
   echo -n -s $cwd $git_info $normal ' ' $arrow ' '
 end
 
+set fish_greeting
+
 set PATH $HOME/.n/bin $PATH
 set PATH $HOME/.npm/bin $PATH
 set PATH $HOME/.texlive/2014/bin/x86_64-linux $PATH
