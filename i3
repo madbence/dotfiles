@@ -81,7 +81,7 @@ bindsym $mod+a focus parent
 
 # switch to workspace
 bindsym $mod+1 workspace 1:www
-bindsym $mod+2 workspace 2:chat
+bindsym $mod+2 workspace 2:doszgep
 bindsym $mod+3 workspace 3:dev
 bindsym $mod+4 workspace 4:vim
 bindsym $mod+5 workspace 5
@@ -93,7 +93,7 @@ bindsym $mod+odiaeresis workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+apostrophe move workspace 1:www
-bindsym $mod+Shift+quotedbl move workspace 2:chat
+bindsym $mod+Shift+quotedbl move workspace 2:doszgep
 bindsym $mod+Shift+plus move workspace 3:dev
 bindsym $mod+Shift+exclam move workspace 4:vim
 bindsym $mod+Shift+percent move workspace 5
