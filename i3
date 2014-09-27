@@ -166,10 +166,10 @@ mode "move" {
 
 bindsym Mod4+m focus floating; mode "move"
 
-client.focused          #a6e22e #a6e22e #272822 #f92672
-client.unfocused        #272822 #272822 #f8f8f2 #f92672
-client.focused_inactive #272822 #383830 #f8f8f2 #f92672
-client.urgent           #f92672 #ae81ff #f9f8f5
+client.focused          #3498DB #3498DB #ECF0F1 #2ECC71
+client.unfocused        #3498DB #2C3E50 #ECF0F1 #2C3E50
+client.focused_inactive #3498DB #2C3E50 #ECF0F1 #2C3E50
+client.urgent           #3498DB #2C3E50 #ECF0F1 #2C3E50
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -178,12 +178,12 @@ bar {
   status_command i3status
   position top
   colors {
-    statusline  #f5f4f1
-    background  #272822
-    focused_workspace  #a6e22e #272822 #f9f8f5
-    active_workspace   #a1efe4 #272822 #f9f8f5
-    inactive_workspace #272822 #272822 #a59f85
-    urgent_workspace   #f92672 #fd971f #272822
+    statusline  #ECF0F1
+    background  #2C3E50
+    focused_workspace  #3498DB #2C3E50 #f5f5f5
+    active_workspace   #1ABC9C #2C3E50 #BDC3C7
+    inactive_workspace #2C3E50 #2C3E50 #BDC3C7
+    urgent_workspace   #f92672 #2C3E50 #BDC3C7
   }
 }
 
