@@ -32,6 +32,9 @@ set PATH $HOME/.npm/bin $PATH
 set PATH $HOME/.texlive/2014/bin/x86_64-linux $PATH
 
 set -x EDITOR vim
+set -x TERM xterm-256color
+
+eval $HOME/dotfiles/shell.sh
 
 if status --is-login
   if test -z "$DISPLAY" -a $XDG_VTNR = 1

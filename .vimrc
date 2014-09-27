@@ -139,13 +139,9 @@ set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusl
 " Enable syntax highlighting
 syntax enable
 
-colorscheme hybrid
-set background=dark
-
 " Set extra options when running in GUI mode
 if has("gui_running")
   set guioptions=a
-  set t_Co=256
   " set guifont=PragmataPro\ 20
   if has("mac")
     set guifont=monoOne:h11
@@ -156,6 +152,10 @@ if has("gui_running")
   set guitablabel=%M\ %t
 endif
 
+set background=dark
+let base16colorspace=256
+colorscheme base16-flat
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -164,7 +164,7 @@ set ffs=unix,dos,mac
 
 " Fancy statusline :3
 let g:airline_powerline_fonts=1
-let g:airline_theme='powerlineish'
+let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
