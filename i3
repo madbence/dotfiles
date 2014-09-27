@@ -106,6 +106,7 @@ bindsym $mod+Shift+Odiaeresis move workspace 10
 # assign programs
 assign [class="Google-chrome"] → 1:www
 assign [class="Gvim"] → 4:vim
+assign [class="Spotify"] → 8:spotify
 assign [class="Vlc"] → 9:vlc
 
 # reload the configuration file
