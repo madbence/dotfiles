@@ -25,8 +25,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Shougo/neocomplete.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'chriskempson/base16-vim'
@@ -34,6 +34,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'fatih/vim-go'
 " Plugin 'Rip-Rip/clang_complete'
+Plugin 'godlygeek/tabular'
+Plugin 'whatyouhide/vim-gotham'
 
 " Enable filetype plugins
 filetype plugin on
@@ -143,7 +145,9 @@ if has("gui_running")
     set guifont=monoOne:h11
   else
     " set guifont=Ttyp0\ 8
-    set guifont=Tewi\ 8
+    " set guifont=Input\ Mono\ Compressed\ 10
+    " set guifont=Tewi\ 8
+    set guifont=Terminus\ 8
   endif
   set guitablabel=%M\ %t
 endif
@@ -344,21 +348,23 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:ctrlp_custom_ignore = 'node_modules'
 
 " Configure neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" let g:acp_enableAtStartup = 0
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"   let g:neocomplete#sources#omni#input_patterns = {}
+" endif
 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return neocomplete#close_popup() . "\<CR>"
+"   " For no inserting <CR> key.
+"   " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" endfunction
+" " <TAB>: completion.
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+set cc=80
