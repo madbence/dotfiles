@@ -140,12 +140,11 @@ syntax enable
 " Set extra options when running in GUI mode
 if has("gui_running")
   set guioptions=a
-  " set guifont=PragmataPro\ 20
   if has("mac")
     set guifont=monoOne:h11
   else
     " set guifont=Ttyp0\ 8
-    " set guifont=Input\ Mono\ Compressed\ 10
+    " set guifont=Input\ Mono\ Compressed\ 9
     " set guifont=Tewi\ 8
     set guifont=Terminus\ 8
   endif
