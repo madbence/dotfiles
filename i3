@@ -166,11 +166,37 @@ mode "move" {
 
 bindsym Mod4+m focus floating; mode "move"
 
-client.focused          #3498DB #3498DB #ECF0F1 #2ECC71
-client.unfocused        #3498DB #2C3E50 #ECF0F1 #2C3E50
-client.focused_inactive #3498DB #2C3E50 #ECF0F1 #2C3E50
-client.urgent           #3498DB #2C3E50 #ECF0F1 #2C3E50
+# $i3-theme-window
+# solarized accents
+set $yellow #b58900
+set $orange #cb4b16
+set $red  #dc322f
+set $magenta  #d33682
+set $violet #6c71c4
+set $blue #268bd2
+set $cyan #2aa198
+set $green  #859900
 
+# solarized light
+set $baseA3 #fdf6e3
+set $baseA2 #eee8d5
+set $baseA1 #93a1a1
+set $baseA0 #839496
+set $baseB0 #657b83
+set $baseB1 #586e75
+set $baseB2 #073642
+set $baseB3 #002b36
+set $custom #e1cab3
+
+####################
+# solarized (borders)
+####################
+# clientclass     border  backgr. text  indicator
+client.focused        $baseB0 $green  $baseB3 $blue
+client.focused_inactive   $baseB0 $cyan $baseB2 $violet
+client.unfocused      $baseB0 $baseA2 $baseB1 $baseA1
+#client.urgent        $baseB0 $orange $baseB3 $red
+client.urgent       $baseB0 $yellow $baseB3 $orange
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -178,12 +204,19 @@ bar {
   status_command i3status
   position top
   colors {
-    statusline  #ECF0F1
-    background  #2C3E50
-    focused_workspace  #3498DB #2C3E50 #f5f5f5
-    active_workspace   #1ABC9C #2C3E50 #BDC3C7
-    inactive_workspace #2C3E50 #2C3E50 #BDC3C7
-    urgent_workspace   #f92672 #2C3E50 #BDC3C7
+    # status
+    separator $blue
+    background $baseA3
+    statusline $baseB2
+    #####################
+    # solarized (borders)
+    #####################
+    # workclass       border backgr. text
+    focused_workspace     $baseB0 $green  $baseA3
+    active_workspace    $baseB0 $cyan   $baseA2
+    inactive_workspace    $baseB0 $baseA2 $baseB1
+    #urgent_workspace     $baseB0 $orange $baseB3
+    urgent_workspace    $baseB0 $orange $baseB3
   }
 }
 
@@ -194,13 +227,15 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 bindsym Print exec scrot -s
- 
+
 workspace_auto_back_and_forth yes
 
-# lock screen 
+# lock screen
 bindsym Ctrl+Mod1+l exec i3lock -d
 
 # shutdown dialog
 # bindsym Ctrl+Mod1+Delete exec shutdown-dialog
 
 new_window pixel 2
+
+for_window [title="grafika"] floating enable

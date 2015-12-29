@@ -11,6 +11,7 @@
   prune-remote = !git remote | xargs -n 1 git remote prune
   prune-local = !git branch --merged | grep -v '*' | grep -v master | grep -v development | xargs -n 1 git branch -d
   cleanup = !git prune-remote && git prune-local
+  rebase-master = !bash -c 'BRANCH=$(git cb) && git co master && git rebase $BRANCH && git p' -
 [user]
   name = Bence Dányi
   email = bence@danyi.me

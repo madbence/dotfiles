@@ -36,6 +36,9 @@ Plugin 'fatih/vim-go'
 " Plugin 'Rip-Rip/clang_complete'
 Plugin 'godlygeek/tabular'
 Plugin 'whatyouhide/vim-gotham'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'unblevable/quick-scope'
+Plugin 'altercation/vim-colors-solarized'
 
 " Enable filetype plugins
 filetype plugin on
@@ -143,17 +146,15 @@ if has("gui_running")
   if has("mac")
     set guifont=monoOne:h11
   else
-    " set guifont=Ttyp0\ 8
-    " set guifont=Input\ Mono\ Compressed\ 9
-    " set guifont=Tewi\ 8
-    set guifont=Terminus\ 8
+    " set guifont=Iosevka\ 10
+    set guifont=Tewi\ 8
   endif
   set guitablabel=%M\ %t
 endif
 
 set background=dark
 let base16colorspace=256
-colorscheme base16-flat
+colorscheme base16-eighties
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -223,6 +224,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+map <C-left> gT
+map <C-right> gt
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>
@@ -303,14 +307,14 @@ map <leader>pp :setlocal paste!<cr>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" nnoremap <up> <nop>
-" nnoremap <down> <nop>
-" nnoremap <left> <nop>
-" nnoremap <right> <nop>
-" inoremap <up> <nop>
-" inoremap <down> <nop>
-" inoremap <left> <nop>
-" inoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 inoremap <F1> <ESC>
