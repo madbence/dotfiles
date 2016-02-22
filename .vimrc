@@ -14,7 +14,8 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'othree/html5.vim'
 Plugin 'tpope/vim-fugitive'
 " Plugin 'airblade/vim-gitgutter'
@@ -154,7 +155,7 @@ endif
 
 set background=dark
 let base16colorspace=256
-colorscheme base16-eighties
+colorscheme base16-ocean
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8

@@ -29,6 +29,8 @@ bindsym $mod+Shift+Q kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 
+hide_edge_borders none
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -77,7 +79,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindcode $mod+d focus child
+bindsym $mod+c focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1:www
@@ -166,37 +168,9 @@ mode "move" {
 
 bindsym Mod4+m focus floating; mode "move"
 
-# $i3-theme-window
-# solarized accents
-set $yellow #b58900
-set $orange #cb4b16
-set $red  #dc322f
-set $magenta  #d33682
-set $violet #6c71c4
-set $blue #268bd2
-set $cyan #2aa198
-set $green  #859900
-
-# solarized light
-set $baseA3 #fdf6e3
-set $baseA2 #eee8d5
-set $baseA1 #93a1a1
-set $baseA0 #839496
-set $baseB0 #657b83
-set $baseB1 #586e75
-set $baseB2 #073642
-set $baseB3 #002b36
-set $custom #e1cab3
-
-####################
-# solarized (borders)
-####################
 # clientclass     border  backgr. text  indicator
-client.focused        $baseB0 $green  $baseB3 $blue
-client.focused_inactive   $baseB0 $cyan $baseB2 $violet
-client.unfocused      $baseB0 $baseA2 $baseB1 $baseA1
-#client.urgent        $baseB0 $orange $baseB3 $red
-client.urgent       $baseB0 $yellow $baseB3 $orange
+client.focused          #a3be8c #a3be8c #dfe1e8 #d08770
+client.unfocused        #343d46 #343d46 #a7adba
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -205,18 +179,14 @@ bar {
   position top
   colors {
     # status
-    separator $blue
-    background $baseA3
-    statusline $baseB2
-    #####################
-    # solarized (borders)
-    #####################
+    separator  #65737e
+    background #343d46
+    statusline #dfe1e8
     # workclass       border backgr. text
-    focused_workspace     $baseB0 $green  $baseA3
-    active_workspace    $baseB0 $cyan   $baseA2
-    inactive_workspace    $baseB0 $baseA2 $baseB1
-    #urgent_workspace     $baseB0 $orange $baseB3
-    urgent_workspace    $baseB0 $orange $baseB3
+    focused_workspace     #a7adba #65737e #dfe1e8
+    # active_workspace    $baseB0 $cyan   $baseA2
+    inactive_workspace    #65737e #343d46 #a7adba
+    # urgent_workspace    $baseB0 $orange $baseB3
   }
 }
 
@@ -236,6 +206,6 @@ bindsym Ctrl+Mod1+l exec i3lock -d
 # shutdown dialog
 # bindsym Ctrl+Mod1+Delete exec shutdown-dialog
 
-new_window pixel 2
+new_window pixel 3
 
 for_window [title="grafika"] floating enable
