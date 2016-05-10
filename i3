@@ -27,7 +27,7 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run -fn Tewi -nb '#343d46' -p run -sb '#65737e'
 
 hide_edge_borders none
 
@@ -186,7 +186,7 @@ bar {
     focused_workspace     #a7adba #65737e #dfe1e8
     # active_workspace    $baseB0 $cyan   $baseA2
     inactive_workspace    #65737e #343d46 #a7adba
-    # urgent_workspace    $baseB0 $orange $baseB3
+    urgent_workspace      #a7adba #343d46 #bf616a
   }
 }
 
