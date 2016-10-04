@@ -1,0 +1,92 @@
+# pure
+# by Kevin Lanni
+# https://github.com/therealklanni/pure
+# MIT License
+
+# For my own and others sanity
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+
+# turns seconds into human readable time
+# 165392 => 1d 21h 56m 32s
+prompt_pure_human_time() {
+  local tmp=$1
+  local days=$(( tmp / 60 / 60 / 24 ))
+  local hours=$(( tmp / 60 / 60 % 24 ))
+  local minutes=$(( tmp / 60 % 60 ))
+  local seconds=$(( tmp % 60 ))
+  echo -n " "
+  (( $days > 0 )) && echo -n "${days}d "
+  (( $hours > 0 )) && echo -n "${hours}h "
+  (( $minutes > 0 )) && echo -n "${minutes}m "
+  echo "${seconds}s"
+}
+
+prompt_pure_preexec() {
+  cmd_timestamp=$EPOCHSECONDS
+
+  # shows the current dir and executed command in the title when a process is active
+  print -Pn "\e]0;"
+  echo -nE "$PWD:t: $2"
+  print -Pn "\a"
+}
+
+prompt_pure_precmd() {
+  # shows the full path in the title
+  print -Pn '\e]0;%~\a'
+
+  # show slow commands
+  local stop=$EPOCHSECONDS
+  local start=${cmd_timestamp:-$stop}
+  integer elapsed=$stop-$start
+  (($elapsed > 5)) && print -P '%F{yellow}$(prompt_pure_human_time $elapsed)%f'
+
+  # reset value since `preexec` isn't always triggered
+  unset cmd_timestamp
+}
+
+
+prompt_pure_setup() {
+  # prevent percentage showing up
+  # if output doesn't end with a newline
+  export PROMPT_EOL_MARK=''
+
+  prompt_opts=(cr subst percent)
+
+  zmodload zsh/datetime
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  add-zsh-hook precmd prompt_pure_precmd
+  add-zsh-hook preexec prompt_pure_preexec
+
+  # show username@host if logged in through SSH
+  [[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%n@%m '
+
+  ZSH_THEME_GIT_PROMPT_PREFIX=" %F{cyan}git:%f%F{yellow}"
+  ZSH_THEME_GIT_PROMPT_SUFFIX="%b"
+  ZSH_THEME_GIT_PROMPT_DIRTY=""
+  ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+  ZSH_THEME_GIT_PROMPT_ADDED="%F{green}(added)%f "
+  ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue}(modified)%f "
+  ZSH_THEME_GIT_PROMPT_DELETED="%F{red}(deleted)%f "
+  ZSH_THEME_GIT_PROMPT_RENAMED="%F{magenta}(renamed)%f "
+  ZSH_THEME_GIT_PROMPT_UNMERGED="%F{yellow}(unmerged)%f "
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{cyan}(untracked)%f "
+
+  # prompt turns red if the previous command didn't exit with 0
+  PROMPT='%F{blue}%c %(?.%F{green}.%F{red})λ%f '
+  RPROMPT='$(git_prompt_info) $(git_prompt_status)%f'
+}
+
+prompt_pure_setup "$@"
