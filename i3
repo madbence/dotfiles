@@ -13,7 +13,8 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Tewi 8
+# font pango:Tewi 8
+font pango:Iosevka Medium 12
 
 exec_always ~/.xsession
 
@@ -27,9 +28,13 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn Tewi -nb '#343d46' -p run -sb '#65737e'
+bindsym $mod+d exec dmenu_run -fn 'Iosevka\ Medium:size=12' -nb '#343d46' -p run -sb '#65737e'
 
 hide_edge_borders none
+gaps inner 15
+gaps outer 150
+# smart_gaps on
+# smart_borders on
 
 # change focus
 bindsym $mod+j focus left
@@ -170,30 +175,30 @@ bindsym Mod4+m focus floating; mode "move"
 
 # clientclass     border  backgr. text  indicator
 client.focused          #a3be8c #a3be8c #dfe1e8 #d08770
-client.unfocused        #343d46 #343d46 #a7adba
+client.unfocused        #2b303b #2b303b #a7adba
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  status_command i3status
-  position top
-  colors {
-    # status
-    separator  #65737e
-    background #343d46
-    statusline #dfe1e8
-    # workclass       border backgr. text
-    focused_workspace     #a7adba #65737e #dfe1e8
-    # active_workspace    $baseB0 $cyan   $baseA2
-    inactive_workspace    #65737e #343d46 #a7adba
-    urgent_workspace      #a7adba #343d46 #bf616a
-  }
-}
+# bar {
+#   status_command i3status
+#   position top
+#   colors {
+#     # status
+#     separator  #65737e
+#     background #343d46
+#     statusline #dfe1e8
+#     # workclass       border backgr. text
+#     focused_workspace     #a7adba #65737e #dfe1e8
+#     # active_workspace    $baseB0 $cyan   $baseA2
+#     inactive_workspace    #65737e #343d46 #a7adba
+#     urgent_workspace      #a7adba #343d46 #bf616a
+#   }
+# }
 
-# bindsym XF86AudioLowerVolume exec --no-startup-id ~/.i3/volman/adjust 1 -10
-# bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.i3/volman/adjust 1 10
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -3%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +3%
 # bindsym XF86AudioMute exec --no-startup-id ~/.i3/volman/toggle 1
-bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 bindsym Print exec scrot -s
@@ -208,4 +213,4 @@ bindsym Ctrl+Mod1+l exec i3lock -d
 
 new_window pixel 3
 
-for_window [title="grafika"] floating enable
+for_window [class="^.*"] border pixel 3
