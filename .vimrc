@@ -16,32 +16,24 @@ call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'othree/html5.vim'
-Plugin 'tpope/vim-fugitive'
-" Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/syntastic'
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'kien/ctrlp.vim'
+Plugin 'w0rp/ale'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'wavded/vim-stylus'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
-" Plugin 'tpope/vim-repeat'
-Plugin 'Valloric/YouCompleteMe'
-" Plugin 'Shougo/neocomplete.vim'
 Plugin 'pangloss/vim-javascript'
-" Plugin 'w0ng/vim-hybrid'
 Plugin 'chriskempson/base16-vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-" Plugin 'fatih/vim-go'
-" Plugin 'Rip-Rip/clang_complete'
-" Plugin 'godlygeek/tabular'
-" Plugin 'whatyouhide/vim-gotham'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'unblevable/quick-scope'
-" Plugin 'altercation/vim-colors-solarized'
 Plugin 'rust-lang/rust.vim'
 Plugin 'flowtype/vim-flow'
+Plugin 'morhetz/gruvbox'
+" Plugin 'maralla/completor.vim'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-flow.vim'
+Plugin 'prabirshrestha/asyncomplete-buffer.vim'
 
 " Enable filetype plugins
 filetype plugin on
@@ -113,6 +105,7 @@ set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -146,18 +139,16 @@ syntax enable
 " Set extra options when running in GUI mode
 if has("gui_running")
   set guioptions=a
-  if has("mac")
-    set guifont=monoOne:h11
-  else
-    " set guifont=Iosevka\ 10
-    set guifont=Tewi\ 8
-  endif
+  set guifont=lucy\ tewi\ 8
   set guitablabel=%M\ %t
 endif
 
+" disable gruvbox italics
+let g:gruvbox_italic=0
+
 set background=dark
 let base16colorspace=256
-colorscheme base16-ocean
+colorscheme gruvbox
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -167,7 +158,7 @@ set ffs=unix,dos,mac
 
 " Fancy statusline :3
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,17 +282,16 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scripbble
-map <leader>q :e ~/buffer<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -332,9 +322,7 @@ nnoremap <leader>v V`]
 
 " Go back to normal mode fast
 inoremap jj <ESC>
-
-" Gundo!
-nnoremap <F5> :GundoToggle<CR>
+inoremap jk <ESC>
 
 " Sane indenting
 vnoremap < <gv
@@ -344,34 +332,27 @@ vnoremap > >gv
 set list
 set listchars=tab:»·,trail:·,eol:¬
 
-" Set shell to bash, because syntastic is not compatible with fish
-set shell=bash
-
-" ESlint as default linter for js
-let g:syntastic_javascript_checkers = ['eslint']
-
-" Ignore node_modules
-let g:ctrlp_custom_ignore = 'node_modules'
-
-" Configure neocomplete
-" let g:acp_enableAtStartup = 0
-" let g:neocomplete#enable_at_startup = 1
-" let g:neocomplete#enable_smart_case = 1
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" if !exists('g:neocomplete#sources#omni#input_patterns')
-"   let g:neocomplete#sources#omni#input_patterns = {}
-" endif
-
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"   return neocomplete#close_popup() . "\<CR>"
-"   " For no inserting <CR> key.
-"   " return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-" endfunction
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" Flowtype syntax
+let g:javascript_plugin_flow = 1
 
 set cc=80
 set guiheadroom=0
+
+call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
+  \ 'name': 'flow',
+  \ 'whitelist': ['javascript'],
+  \ 'priority': 1,
+  \ 'completor': function('asyncomplete#sources#flow#completor'),
+  \ }))
+
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+  \ 'name': 'buffer',
+  \ 'whitelist': ['*'],
+  \ 'priority': 0,
+  \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
+
+" tab completion for asyncomplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
