@@ -22,18 +22,20 @@ Plugin 'wavded/vim-stylus'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'chriskempson/base16-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'unblevable/quick-scope'
 Plugin 'rust-lang/rust.vim'
-Plugin 'flowtype/vim-flow'
+" Plugin 'flowtype/vim-flow'
 Plugin 'morhetz/gruvbox'
 " Plugin 'maralla/completor.vim'
 Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-flow.vim'
 Plugin 'prabirshrestha/asyncomplete-buffer.vim'
+Plugin 'racer-rust/vim-racer'
 
 " Enable filetype plugins
 filetype plugin on
@@ -264,10 +266,10 @@ set viminfo^=%
 map 0 ^
 
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <M-j> :m+<cr>==
+nmap <M-k> :m-2<cr>==
+vmap <M-j> :m '>+1<cr>gv=gv
+vmap <M-k> :m '<-2<cr>gv=gv
 
 if has("mac") || has("macunix")
   nmap <D-j> <M-j>
@@ -335,12 +337,17 @@ set listchars=tab:»·,trail:·,eol:¬
 " Flowtype syntax
 let g:javascript_plugin_flow = 1
 
+" Enable JSX for js files
+let g:jsx_ext_required = 0
+
+" Highlight the 80th column
 set cc=80
+
 set guiheadroom=0
 
 call asyncomplete#register_source(asyncomplete#sources#flow#get_source_options({
   \ 'name': 'flow',
-  \ 'whitelist': ['javascript'],
+  \ 'whitelist': ['javascript', 'javascript.jsx'],
   \ 'priority': 1,
   \ 'completor': function('asyncomplete#sources#flow#completor'),
   \ }))
@@ -356,3 +363,5 @@ call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+let g:racer_cmd = "/home/lennon/.cargo/bin/racer"
