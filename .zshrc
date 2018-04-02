@@ -24,10 +24,6 @@ source ~/.zsh/git.zsh
 source ~/scripts/base16-ocean.dark.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-zle-line-init() {
-  zle autosuggest-start
-}
-zle -N zle-line-init
 
 autoload -U promptinit && promptinit
 prompt pure
