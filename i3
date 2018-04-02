@@ -14,9 +14,9 @@ set $mod Mod4
 # font for window titles. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font pango:Tewi 8
-font pango:Iosevka Medium 12
+font pango:Iosevka 12
 
-exec_always ~/.xsession
+# exec_always ~/.xsession
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -28,11 +28,12 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'Iosevka\ Medium:size=12' -nb '#343d46' -p run -sb '#65737e'
+# bindsym $mod+d exec dmenu_run -fn 'Iosevka Medium:size=12' -nb '#343d46' -p run -sb '#65737e'
+bindsym $mod+d exec rofi -show run
 
 hide_edge_borders none
-gaps inner 15
-gaps outer 150
+gaps inner 5
+gaps outer 0
 # smart_gaps on
 # smart_borders on
 
@@ -206,11 +207,11 @@ bindsym Print exec scrot -s
 workspace_auto_back_and_forth yes
 
 # lock screen
-bindsym Ctrl+Mod1+l exec i3lock -d
+bindsym Ctrl+$mod+l exec i3lock-fancy -pf Iosevka-Medium
 
 # shutdown dialog
 # bindsym Ctrl+Mod1+Delete exec shutdown-dialog
 
-new_window pixel 3
+new_window pixel 0
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 0
