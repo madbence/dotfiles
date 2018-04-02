@@ -21,9 +21,9 @@ bindkey "^[[7~" beginning-of-line
 fpath=("$HOME/.zfunctions" $fpath)
 
 source ~/.zsh/git.zsh
-source ~/scripts/base16-ocean.dark.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+source ~/dotfiles/gruvbox.sh
 
 autoload -U promptinit && promptinit
 prompt pure
