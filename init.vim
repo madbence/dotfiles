@@ -116,6 +116,7 @@ set tm=500
 
 " Show line numbers
 set number
+set relativenumber
 
 " Fix terminal timeout
 if ! has('gui_running')
