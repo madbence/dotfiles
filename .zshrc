@@ -22,8 +22,7 @@ fpath=("$HOME/.zfunctions" $fpath)
 
 source ~/.zsh/git.zsh
 source ~/scripts/base16-ocean.dark.sh
-source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 zle-line-init() {
   zle autosuggest-start
