@@ -1,37 +1,42 @@
-# Lines configured by zsh-newuser-install
+# fancy history
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
 HISTORY_IGNORE=' *'
 setopt appendhistory autocd histignoredups
+
+# disable annoying sounds
 unsetopt beep
+
+# emacs key bindings
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/picard/.zshrc'
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-bindkey "^[[3~" delete-char
-bindkey "^[[8~" end-of-line
-bindkey "^[[7~" beginning-of-line
-
+# source a few stuffz
 fpath=("$HOME/.zfunctions" $fpath)
-
 source ~/.zsh/git.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 source ~/dotfiles/gruvbox.sh
 
-autoload -U promptinit && promptinit
+zstyle :compinstall filename "~/.zshrc"
+zstyle ':completion:*' menu select=2
+autoload -Uz compinit promptinit
+compinit
+promptinit
 prompt pure
 
-export NVM_DIR="/home/picard/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# fix delete button
+bindkey "^[[3~" delete-char
 
-zstyle ':completion:*' menu select=2
+# fix default editor
+export EDITOR=nvim
+export VISUAL=nvim
 
-export PATH=~/texlive/bin/x86_64-linux:$PATH
-export PATH=~/scripts:$PATH
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+alias ag="ag $* -C --pager 'less -r'"
+alias vim=nvim
+alias vi=nvim
+
+typeset -U path
+export PATH="$PATH:$HOME/.rvm/bin"
