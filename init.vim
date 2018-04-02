@@ -31,15 +31,8 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'autozimu/LanguageClient-neovim'
-" Plugin 'wokalski/autocomplete-flow'
-" Plugin 'racer-rust/vim-racer'
 Plugin 'ctrlpvim/ctrlp.vim'
-" Plugin 'amerlyq/vim-focus-autocmd'
-" Plugin 'reasonml-editor/vim-reason'
-" Plugin 'guns/vim-clojure-static'
-" Plugin 'tpope/vim-fireplace'
-" Plugin 'bhurlow/vim-parinfer'
-" Plugin 'clojure-vim/async-clj-omni'
+Plugin 'vim-vdebug/vdebug'
 
 " Enable filetype plugins
 filetype plugin on
