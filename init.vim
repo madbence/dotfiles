@@ -33,6 +33,7 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'autozimu/LanguageClient-neovim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-vdebug/vdebug'
+Plugin 'Yggdroot/indentLine'
 
 " Enable filetype plugins
 filetype plugin on
@@ -356,3 +357,5 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'cpp': ['clangd'],
   \ }
+
+let g:indentLine_concealcursor = 0
