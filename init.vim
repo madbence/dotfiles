@@ -356,6 +356,10 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'cpp': ['clangd'],
+  \ 'python': ['/Users/picard/Library/Python/2.7/bin/pyls'],
   \ }
 
 let g:indentLine_concealcursor = 0
+set termguicolors
+let g:python3_host_prog = '/Users/picard/.pyenv/versions/3.6.4/bin/python'
+let g:python_host_prog = '/Users/picard/.pyenv/versions/2.7.13/bin/python'
