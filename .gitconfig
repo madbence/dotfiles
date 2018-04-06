@@ -18,7 +18,7 @@
 [color]
   ui = auto
 [core]
-  editor = vim
+  editor = nvim
 [push]
   default = upstream
 [rebase]
