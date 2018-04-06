@@ -1,3 +1,5 @@
 # dotfiles
 
-![neofetch](neofetch.png)
+![neofetch](neofetch-arch.png)
+
+![neofetch](neofetch-osx.png)
