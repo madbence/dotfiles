@@ -1,5 +1,5 @@
 URxvt.scrollBar: false
-URxvt.font: xft:Iosevka\ Term:size=10
+URxvt.font: xft:Iosevka\ Term\ Medium:size=14
 ! URxvt*font: xft:lucy tewi:size=8
 URxvt.fading: 10
 
@@ -13,8 +13,8 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 URxvt.keysym.C-A-Up:        font-size:incglobal
 URxvt.keysym.C-A-Down:      font-size:decglobal
 
-! rofi.font: lucy tewi 8
-rofi.font: Iosevka\ Term:size=10
+rofi.font: lucy tewi 8
+! rofi.font: Iosevka\ Term:size=10
 
 ! gruvbox colors
 *background: #282828
