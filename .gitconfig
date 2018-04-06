@@ -33,3 +33,8 @@
 [diff]
   renames = copies
   mnemonicprefix = true
+  colorMoved = zebra
+[difftool]
+  prompt = false
+[pager]
+  difftool = true
