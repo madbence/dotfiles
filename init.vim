@@ -30,6 +30,7 @@ Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-vdebug/vdebug'
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Enable filetype plugins
