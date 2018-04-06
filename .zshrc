@@ -46,7 +46,12 @@ export PYENV_ROOT="$HOME/.pyenv"
 export LC_ALL="en_US.UTF-8"
 
 typeset -U path
-export PATH="$HOME/.bin:$HOME/.prezi/simply:$HOME/.rvm/bin:/usr/local/bin/:$PATH"
+path+=$HOME/.bin
+path+=$HOME/.rvm/bin
+path+=$HOME/.pyenv/bin
+path+=$HOME/.prezi/simply
+path+=/usr/local/bin
+export PATH
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
