@@ -42,5 +42,12 @@ alias ag="ag $* -C --pager 'less -r'"
 alias vim=nvim
 alias vi=nvim
 
+export PYENV_ROOT="$HOME/.pyenv"
+export LC_ALL="en_US.UTF-8"
+
 typeset -U path
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$HOME/.bin:$HOME/.prezi/simply:$HOME/.rvm/bin:/usr/local/bin/:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
