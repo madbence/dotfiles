@@ -10,30 +10,27 @@ set modeline
 " required!
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
-
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'w0rp/ale'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'chriskempson/base16-vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'unblevable/quick-scope'
-Plugin 'rust-lang/rust.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'autozimu/LanguageClient-neovim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-vdebug/vdebug'
-Plugin 'Yggdroot/indentLine'
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
+Plug 'digitaltoad/vim-jade'
+Plug 'wavded/vim-stylus'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'chriskempson/base16-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'unblevable/quick-scope'
+Plug 'rust-lang/rust.vim'
+Plug 'morhetz/gruvbox'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-vdebug/vdebug'
+call plug#end()
 
 " Enable filetype plugins
 filetype plugin on
