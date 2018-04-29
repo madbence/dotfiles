@@ -43,13 +43,13 @@ alias vim=nvim
 alias vi=nvim
 
 export PYENV_ROOT="$HOME/.pyenv"
-export LC_ALL="en_US.UTF-8"
 
 typeset -U path
 path+=$HOME/.bin
 path+=$HOME/.rvm/bin
 path+=$HOME/.pyenv/bin
-path+=$HOME/.prezi/simply
+path+=$HOME/.cargo/bin
+path+=$HOME/.local/bin
 path+=/usr/local/bin
 export PATH
 
