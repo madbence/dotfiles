@@ -1,15 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=700
-
-" modeline magic!
-set modeline
-
-" required!
-filetype off
-
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -29,95 +17,45 @@ Plug 'morhetz/gruvbox'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-vdebug/vdebug'
 Plug 'junegunn/goyo.vim'
 call plug#end()
 
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-" Set to auto read when a file is changed from the outside
+set history=700
+set modeline
 set autoread
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
 let mapleader = ","
-let g:mapleader = ","
 
-" Fast saving
-nmap <leader>w :w!<cr>
+cnoremap w!! w !sudo tee % >/dev/null
 
-" More brütal saving
-cmap w!! w !sudo tee % >/dev/null
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
-
-" Highlight current line
-set cursorline
+set cmdheight=2
 set cursorcolumn
-
-" Turn on the WiLd menu
+set cursorline
+set hidden
+set laststatus=2
+set noshowmode
+set number
+set relativenumber
+set ruler
+set scrolloff=7
+set wildignore=*.o,*~,*.pyc,*.toc,*.aux,*.tos,*.nav,*.pdf,*.snm,*.out,*.log
 set wildmenu
 
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc,*.toc,*.aux,*.tos,*.nav,*.pdf,*.snm,*.out,*.log
-
-"Always show current position
-set ruler
-
-" Height of the command bar
-set cmdheight=2
-
-" Needed for powerline
-set laststatus=2
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
 set ignorecase
-
-" When searching try to be smart about cases
 set smartcase
-
-" Highlight search results
 set hlsearch
-
-" Makes search act like search in modern browsers
 set incsearch
-
-" Don't redraw while executing macros (good performance config)
 set lazyredraw
-
-" For regular expressions turn magic on
 set magic
-
-" Show matching brackets when text indicator is over them
 set showmatch
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
+set matchtime=2
 set noerrorbells
 set novisualbell
-set t_vb=
-set tm=500
+set timeoutlen=500
 
-" Show line numbers
-set number
-set relativenumber
-
-" Fix terminal timeout
 if ! has('gui_running')
     set ttimeoutlen=10
     augroup FastEscape
@@ -127,146 +65,67 @@ if ! has('gui_running')
     augroup END
 endif
 
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable
-
-" Set extra options when running in GUI mode
 if has("gui_running")
   set guioptions=a
-  " set guifont=lucy\ tewi\ 8
   set guifont=Iosevka\ Term\ Medium\ 10
   set guitablabel=%M\ %t
 endif
 
-" disable gruvbox italics
 let g:gruvbox_italic=0
-
 set background=dark
 colorscheme gruvbox
 
-" Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
-
-" Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Fancy statusline :3
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled=1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
+set autoindent
+set wrap
 
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
+nnoremap j gj
+nnoremap k gk
+nnoremap <space> /
+nnoremap <c-space> ?
+nnoremap <silent> <leader><cr> :noh<cr>
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <leader>bd :Bclose<cr>
+nnoremap <leader>ba :% bd!<cr>
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-map <C-left> gT
-map <C-right> gt
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all the buffers
-map <leader>ba :% bd!<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
 catch
 endtry
 
-" Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
 
-" Remember info about open buffers on close
 set viminfo^=%
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> :m+<cr>==
-nmap <M-k> :m-2<cr>==
-vmap <M-j> :m '>+1<cr>gv=gv
-vmap <M-k> :m '<-2<cr>gv=gv
+nnoremap 0 ^
+nnoremap <M-j> :m+<cr>==
+nnoremap <M-k> :m-2<cr>==
+vnoremap <M-j> :m '>+1<cr>gv=gv
+vnoremap <M-k> :m '<-2<cr>gv=gv
 
 if has("mac") || has("macunix")
   nmap <D-j> <M-j>
@@ -275,7 +134,6 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -285,18 +143,9 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.js :call DeleteTrailingWS()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
-
-" Edit&reload .vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <leader>pp :setlocal paste!<cr>
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -306,37 +155,25 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" Save on lost focus
 au FocusLost * :wa
-
-" Select pasted text
 nnoremap <leader>v V`]
 
-" Go back to normal mode fast
 inoremap jj <ESC>
 inoremap jk <ESC>
 
-" Sane indenting
 vnoremap < <gv
 vnoremap > >gv
 
-" Show whitespace
 set list
 set listchars=tab:»·,trail:·,eol:¬
 
-" Flowtype syntax
 let g:javascript_plugin_flow = 1
-
-" Enable JSX for js files
 let g:jsx_ext_required = 0
 
-" Highlight the 80th column
 set cc=80
 
 let g:ctrlp_custom_ignore = {
@@ -344,7 +181,6 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 let g:deoplete#enable_at_startup = 1
-" let g:autocomplete_flow#insert_paren_after_function = 0
 set completeopt-=preview
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -354,10 +190,37 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
   \ 'cpp': ['clangd'],
-  \ 'python': ['/Users/picard/Library/Python/2.7/bin/pyls'],
+  \ 'python': ['pyls'],
+  \ 'rust': ['rls'],
   \ }
 
-let g:indentLine_concealcursor = 0
-set termguicolors
-let g:python3_host_prog = '/Users/picard/.pyenv/versions/3.6.4/bin/python'
-let g:python_host_prog = '/Users/picard/.pyenv/versions/2.7.13/bin/python'
+let g:LanguageClient_diagnosticsDisplay = {
+  \ 1: {
+  \   'name': 'Error',
+  \   'texthl': 'ALEError',
+  \   'signText': 'x',
+  \   'signTexthl': 'ALEErrorSign',
+  \ },
+  \ 2: {
+  \   'name': 'Warning',
+  \   'texthl': 'ALEWarning',
+  \   'signText': '!',
+  \   'signTexthl': 'ALEWarningSign',
+  \ },
+  \ 3: {
+  \   'name': 'Information',
+  \   'texthl': 'ALEInfo',
+  \   'signText': 'i',
+  \   'signTexthl': 'ALEInfoSign',
+  \ },
+  \ 4: {
+  \   'name': 'Hint',
+  \   'texthl': 'ALEInfo',
+  \   'signText': '?',
+  \   'signTexthl': 'ALEInfoSign',
+  \ },
+  \ }
+
+let home = expand('$HOME')
+let g:python3_host_prog = home . '/.nvim-python3/bin/python'
+let g:python_host_prog = home . '/.nvim-python2/bin/python'
