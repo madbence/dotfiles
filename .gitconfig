@@ -15,6 +15,7 @@
 [user]
   name = Bence Dányi
   email = bence@danyi.me
+  signingkey = D438D2BB809F7352
 [color]
   ui = auto
 [core]
@@ -38,3 +39,5 @@
   prompt = false
 [pager]
   difftool = true
+[commit]
+  gpgsign = true
