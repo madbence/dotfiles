@@ -18,6 +18,8 @@ Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'Shougo/unite.vim'
+Plug 'blindFS/vim-taskwarrior'
 call plug#end()
 
 set history=700
