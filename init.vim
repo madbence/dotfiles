@@ -1,25 +1,25 @@
 call plug#begin('~/.vim/plugged')
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+Plug 'blindFS/vim-taskwarrior'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/goyo.vim'
+Plug 'morhetz/gruvbox'
+Plug 'mxw/vim-jsx'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/unite.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'chriskempson/base16-vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'unblevable/quick-scope'
-Plug 'rust-lang/rust.vim'
-Plug 'morhetz/gruvbox'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'Shougo/unite.vim'
-Plug 'blindFS/vim-taskwarrior'
 call plug#end()
 
 set history=700
