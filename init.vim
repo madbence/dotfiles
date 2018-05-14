@@ -95,8 +95,6 @@ set tabstop=2
 set autoindent
 set wrap
 
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
 nnoremap j gj
 nnoremap k gk
 nnoremap <space> /
@@ -106,9 +104,7 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-nnoremap <leader>bd :Bclose<cr>
 nnoremap <leader>ba :% bd!<cr>
-nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 try
   set switchbuf=useopen,usetab,newtab
