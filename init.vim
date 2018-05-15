@@ -6,6 +6,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
+Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'mxw/vim-jsx'
 Plug 'ntpeters/vim-better-whitespace'
@@ -222,3 +223,5 @@ let g:LanguageClient_diagnosticsDisplay = {
 let home = expand('$HOME')
 let g:python3_host_prog = home . '/.nvim-python3/bin/python'
 let g:python_host_prog = home . '/.nvim-python2/bin/python'
+
+let g:ackprg = 'ag --vimgrep'
