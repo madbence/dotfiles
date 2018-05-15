@@ -53,6 +53,8 @@ path+=$HOME/.local/bin
 path+=/usr/local/bin
 export PATH
 
+export LANG="en_US.UTF-8"
+
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
