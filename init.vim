@@ -33,8 +33,8 @@ let mapleader = ","
 cnoremap w!! w !sudo tee % >/dev/null
 
 set cmdheight=2
-set cursorcolumn
-set cursorline
+" set cursorcolumn
+" set cursorline
 set hidden
 set laststatus=2
 set noshowmode
