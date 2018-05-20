@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'blindFS/vim-taskwarrior'
 Plug 'chriskempson/base16-vim'
