@@ -1,0 +1,22 @@
+data.location=~/.task
+include ~/.task/taskd.conf
+
+# contexts
+context.work=+work
+context.nonwork=-work
+
+# reports
+report.meetings.description=Meetings this week
+report.meetings.columns=id,due,due.relative,description
+report.meetings.filter=(status:pending or status:waiting) and +WEEK and +meeting
+report.meetings.sort=due+
+report.meetings.labels=ID,Date,Due,Description
+
+report.next.filter=+READY limit:page
+report.next.filter=+READY limit:page
+
+report.meetings-review.description=Meetings next
+report.meetings-review.columns=id,due,due.relative,description
+report.meetings-review.filter=(status:pending or status:waiting) and due.after:monday and due.before:monday+7d and +meeting
+report.meetings-review.sort=due+
+report.meetings-review.labels=ID,Date,Due,Description
