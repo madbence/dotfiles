@@ -59,6 +59,7 @@ set matchtime=2
 set noerrorbells
 set novisualbell
 set timeoutlen=500
+set updatetime=100
 
 if ! has('gui_running')
     set ttimeoutlen=10
