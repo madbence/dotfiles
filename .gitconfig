@@ -20,7 +20,6 @@
   ui = auto
 [core]
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
   default = upstream
 [rebase]
@@ -53,8 +52,3 @@
   old = red bold
   new = green bold
   whitespace = red reverse
-[diff-so-fancy]
-  useUnicodeRuler = false
-  stripLeadingSymbols = false
-  changeHunkIndicators = false
-  markEmptyLines = false
