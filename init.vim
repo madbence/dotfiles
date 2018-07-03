@@ -178,10 +178,6 @@ let g:jsx_ext_required = 0
 
 set cc=80
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]node_modules$',
-  \ }
-
 let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 
@@ -227,4 +223,4 @@ let home = expand('$HOME')
 let g:python3_host_prog = home . '/.nvim-python3/bin/python'
 let g:python_host_prog = home . '/.nvim-python2/bin/python'
 
-let g:ackprg = 'ag --vimgrep'
+nnoremap <C-p> :FuzzyOpen<CR>
