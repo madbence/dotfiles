@@ -20,7 +20,6 @@
   ui = auto
 [core]
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
   default = upstream
 [rebase]
@@ -40,8 +39,6 @@
   prompt = false
 [pager]
   difftool = true
-[commit]
-  gpgsign = true
 [color "diff-highlight"]
   oldNormal = red bold
   oldHighlight = red bold 52
