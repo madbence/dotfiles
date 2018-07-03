@@ -77,15 +77,18 @@ if has("gui_running")
   set guitablabel=%M\ %t
 endif
 
+set termguicolors
 let g:gruvbox_italic=0
-set background=dark
-colorscheme gruvbox
+let base16colorspace=256
+" set background=dark
+" colorscheme base16-gruvbox-dark-soft
+colorscheme base16-grayscale-light
 
 set encoding=utf8
 set ffs=unix,dos,mac
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled=1
 
 set nobackup
