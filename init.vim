@@ -1,25 +1,28 @@
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plug 'blindFS/vim-taskwarrior'
-Plug 'chriskempson/base16-vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'digitaltoad/vim-jade'
+Plug 'cloudhead/neovim-fuzzy'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
-Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
-Plug 'mxw/vim-jsx'
+Plug 'numkil/ag.nvim'
+" Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript'
-Plug 'rust-lang/rust.vim'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/unite.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
+Plug 'w0rp/ale'
+
+" ui stuff
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
+
+" language plugins
+Plug 'digitaltoad/vim-jade'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
 Plug 'wavded/vim-stylus'
 call plug#end()
 
