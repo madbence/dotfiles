@@ -23,10 +23,16 @@ prompt pure
 
 # source da pluginz
 source ~/.prezi/simply/simply.completion
-source ~/dotfiles/gruvbox.sh
+# source ~/dotfiles/base16-gruvbox-dark-soft.sh
+source ~/dotfiles/base16-grayscale-light.sh
 source ~/.zsh/git.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# setup syntax highlight
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[precommand]='none'
+ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # fix delete button
 bindkey "^[[3~" delete-char
@@ -35,15 +41,21 @@ bindkey "^[[3~" delete-char
 export EDITOR=nvim
 export VISUAL=nvim
 
+# set up nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+# set up aliases
 alias ag="ag $* -C --pager 'less -r'"
 alias vim=nvim
 alias vi=nvim
 
-export PYENV_ROOT="$HOME/.pyenv"
+function cdp() {
+  cd ~/.prezi/$1
+  source virtualenv/bin/activate
+}
 
+# update env vars
 typeset -U path
 path+=$HOME/.bin
 path+=$HOME/.rvm/bin
@@ -52,13 +64,12 @@ path+=$HOME/.cargo/bin
 path+=$HOME/.local/bin
 path+=/usr/local/bin
 export PATH
-
 export LANG="en_US.UTF-8"
 
+# setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[precommand]='none'
-ZSH_HIGHLIGHT_STYLES[path]='none'
+[ -s ~/dotfiles/.zshrc.local ] && source ~/dotfiles/.zshrc.local

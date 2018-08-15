@@ -1,26 +1,28 @@
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plug 'blindFS/vim-taskwarrior'
-Plug 'chriskempson/base16-vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'digitaltoad/vim-jade'
+Plug 'cloudhead/neovim-fuzzy'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
-Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
-Plug 'mxw/vim-jsx'
+Plug 'numkil/ag.nvim'
+" Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript'
-Plug 'rust-lang/rust.vim'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/unite.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
+Plug 'w0rp/ale'
+
+" ui stuff
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0rp/ale'
+
+" language plugins
+Plug 'digitaltoad/vim-jade'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
 Plug 'wavded/vim-stylus'
 call plug#end()
 
@@ -76,15 +78,18 @@ if has("gui_running")
   set guitablabel=%M\ %t
 endif
 
+set termguicolors
 let g:gruvbox_italic=0
-set background=dark
-colorscheme gruvbox
+let base16colorspace=256
+" set background=dark
+" colorscheme base16-gruvbox-dark-soft
+colorscheme base16-grayscale-light
 
 set encoding=utf8
 set ffs=unix,dos,mac
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled=1
 
 set nobackup
@@ -177,10 +182,6 @@ let g:jsx_ext_required = 0
 
 set cc=80
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]node_modules$',
-  \ }
-
 let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 
@@ -226,4 +227,9 @@ let home = expand('$HOME')
 let g:python3_host_prog = home . '/.nvim-python3/bin/python'
 let g:python_host_prog = home . '/.nvim-python2/bin/python'
 
-let g:ackprg = 'ag --vimgrep'
+nnoremap <C-p> :FuzzyOpen<CR>
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
