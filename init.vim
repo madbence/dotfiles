@@ -227,3 +227,8 @@ let g:python3_host_prog = home . '/.nvim-python3/bin/python'
 let g:python_host_prog = home . '/.nvim-python2/bin/python'
 
 nnoremap <C-p> :FuzzyOpen<CR>
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
