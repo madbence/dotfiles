@@ -52,3 +52,5 @@
   whitespace = red reverse
 [commit]
   gpgsign = true
+[include]
+  path = ~/dotfiles/local.gitconfig
