@@ -1,29 +1,18 @@
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plug 'cloudhead/neovim-fuzzy'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/goyo.vim'
-Plug 'numkil/ag.nvim'
-" Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
-Plug 'w0rp/ale'
+
+" language server client
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " ui stuff
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" language plugins
-Plug 'digitaltoad/vim-jade'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'rust-lang/rust.vim'
-Plug 'wavded/vim-stylus'
 call plug#end()
 
 set history=700
@@ -31,8 +20,6 @@ set modeline
 set autoread
 
 let mapleader = ","
-
-cnoremap w!! w !sudo tee % >/dev/null
 
 set cmdheight=2
 " set cursorcolumn
@@ -79,11 +66,9 @@ if has("gui_running")
 endif
 
 set termguicolors
-let g:gruvbox_italic=0
 let base16colorspace=256
-" set background=dark
-" colorscheme base16-gruvbox-dark-soft
-colorscheme base16-grayscale-light
+set background=dark
+colorscheme base16-gruvbox-dark-soft
 
 set encoding=utf8
 set ffs=unix,dos,mac
@@ -140,15 +125,6 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.js :call DeleteTrailingWS()
-
 nnoremap <leader>pp :setlocal paste!<cr>
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -177,59 +153,59 @@ vnoremap > >gv
 set list
 set listchars=tab:»·,trail:·,eol:¬
 
-let g:javascript_plugin_flow = 1
-let g:jsx_ext_required = 0
-
 set cc=80
 
-let g:deoplete#enable_at_startup = 1
-set completeopt-=preview
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-  \ 'cpp': ['clangd'],
-  \ 'python': ['pyls'],
-  \ 'rust': ['rls'],
-  \ }
-
-let g:LanguageClient_diagnosticsDisplay = {
-  \ 1: {
-  \   'name': 'Error',
-  \   'texthl': 'ALEError',
-  \   'signText': 'x',
-  \   'signTexthl': 'ALEErrorSign',
-  \ },
-  \ 2: {
-  \   'name': 'Warning',
-  \   'texthl': 'ALEWarning',
-  \   'signText': '!',
-  \   'signTexthl': 'ALEWarningSign',
-  \ },
-  \ 3: {
-  \   'name': 'Information',
-  \   'texthl': 'ALEInfo',
-  \   'signText': 'i',
-  \   'signTexthl': 'ALEInfoSign',
-  \ },
-  \ 4: {
-  \   'name': 'Hint',
-  \   'texthl': 'ALEInfo',
-  \   'signText': '?',
-  \   'signTexthl': 'ALEInfoSign',
-  \ },
-  \ }
-
 let home = expand('$HOME')
-let g:python3_host_prog = home . '/.nvim-python3/bin/python'
-let g:python_host_prog = home . '/.nvim-python2/bin/python'
+let g:python3_host_prog = home . '/.pyenv/versions/neovim-3.7.4/bin/python'
+let g:python_host_prog = home . '/.pyenv/versions/neovim-2.7.16/bin/python'
 
-nnoremap <C-p> :FuzzyOpen<CR>
+set shortmess+=c
+set signcolumn
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
