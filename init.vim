@@ -5,6 +5,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'wakatime/vim-wakatime'
 
 " language server client
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -69,6 +71,7 @@ set termguicolors
 let base16colorspace=256
 set background=dark
 colorscheme base16-gruvbox-dark-soft
+" colorscheme base16-grayscale-light
 
 set encoding=utf8
 set ffs=unix,dos,mac
@@ -160,7 +163,7 @@ let g:python3_host_prog = home . '/.pyenv/versions/neovim-3.7.4/bin/python'
 let g:python_host_prog = home . '/.pyenv/versions/neovim-2.7.16/bin/python'
 
 set shortmess+=c
-set signcolumn
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
