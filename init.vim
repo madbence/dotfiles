@@ -1,20 +1,33 @@
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'
+" editing qol
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'unblevable/quick-scope'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'wakatime/vim-wakatime'
 
-" language server client
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" heavy stuff
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'eraserhd/parinfer-rust'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 " ui stuff
-Plug 'chriskempson/base16-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'unblevable/quick-scope'
+Plug 'karb94/neoscroll.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'RRethy/nvim-base16'
+Plug 'huytd/vim-nord-light-brighter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'folke/lsp-colors.nvim'
+Plug 'kosayoda/nvim-lightbulb'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()
 
 set history=700
@@ -26,7 +39,7 @@ let mapleader = ","
 set cmdheight=2
 " set cursorcolumn
 " set cursorline
-set hidden
+" set hidden
 set laststatus=2
 set noshowmode
 set number
@@ -61,17 +74,15 @@ if ! has('gui_running')
     augroup END
 endif
 
-if has("gui_running")
-  set guioptions=a
-  set guifont=Iosevka\ Term\ Medium\ 10
-  set guitablabel=%M\ %t
-endif
-
 set termguicolors
 let base16colorspace=256
 set background=dark
-colorscheme base16-gruvbox-dark-soft
-" colorscheme base16-grayscale-light
+
+if !empty($BASE16_THEME)
+  exe "colorscheme base16-" . $BASE16_THEME
+else
+  colorscheme base16-ocean
+endif
 
 set encoding=utf8
 set ffs=unix,dos,mac
@@ -165,50 +176,126 @@ let g:python_host_prog = home . '/.pyenv/versions/neovim-2.7.16/bin/python'
 set shortmess+=c
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+lua <<EOF
+require('neoscroll').setup({
+  easing_function='quadratic'
+})
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "bash", "javascript", "tsx", "typescript", "clojure" },
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = false,
+  }
+}
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+--[[
+require'trouble'.setup {
+  icons = false,
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
+}
+]]
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float({border="single"})<CR>', { noremap = true, silent = true })
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+function map_telescope(bufnr, mode, lhs, method, opts)
+  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, [[<cmd>lua require('telescope.builtin').]] .. method .. '()<CR>', opts)
+end
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+function on_attach(client, bufnr)
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+  map_telescope(bufnr, 'n', 'gd', 'lsp_definitions', opts)
+  map_telescope(bufnr, 'n', 'gi', 'lsp_implementations', opts)
+  map_telescope(bufnr, 'n', 'gr', 'lsp_references', opts)
+  map_telescope(bufnr, 'n', '<leader>ca', 'lsp_code_actions', opts)
+  map_telescope(bufnr, 'n', '<leader>so', 'lsp_document_symbols', opts)
+  map_telescope(bufnr, 'n', '<leader>D', 'lsp_type_definitions', opts)
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+end
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+local handlers =  {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'single'}),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single'}),
+}
 
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+local servers = { 'tsserver', 'eslint', 'bashls' }
+local lspconfig = require 'lspconfig'
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+  }
+end
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<C-SPACE>"] = cmp.mapping.complete(),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+  documentation = {
+    border = 'double',
+  },
+  completion = {
+    keyword_length = 0,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+EOF
