@@ -33,6 +33,7 @@ prompt_pure_human_time() {
 
 prompt_pure_preexec() {
   cmd_timestamp=$EPOCHSECONDS
+  cmd_str=$1
 
   # shows the current dir and executed command in the title when a process is active
   print -Pn "\e]0;"
@@ -49,18 +50,20 @@ prompt_pure_precmd() {
   local start=${cmd_timestamp:-$stop}
   integer elapsed=$stop-$start
   (($elapsed > 5)) && print -P '%F{yellow}$(prompt_pure_human_time $elapsed)%f'
+  (($elapsed > 5)) && osascript -e "display notification \"$cmd_str done in $(prompt_pure_human_time $elapsed)\""
 
   # reset value since `preexec` isn't always triggered
   unset cmd_timestamp
+  unset cmd_str
 }
 
 
 prompt_pure_setup() {
   # prevent percentage showing up
   # if output doesn't end with a newline
-  export PROMPT_EOL_MARK=''
+  # export PROMPT_EOL_MARK='%'
 
-  prompt_opts=(cr subst percent)
+  prompt_opts=(cr subst percent sp)
 
   zmodload zsh/datetime
   autoload -Uz add-zsh-hook
