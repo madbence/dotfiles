@@ -3,6 +3,7 @@
   civ = commit --interactive --verbose
   purr = pull --rebase
   p = push
+  pf = push --force-with-lease
   pu = !git push -u origin $(git cb)
   lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
   co = checkout
@@ -10,30 +11,40 @@
   cot = checkout -t
   prune-remote = !git remote | xargs -n 1 git remote prune
   prune-local = !git branch --merged | grep -v '*' | grep -v master | grep -v development | xargs -n 1 git branch -d
-  cleanup = !git prune-remote && git prune-local
+  prune-remote-rebased = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+  cleanup = !git prune-remote && git prune-local && git prune-remote-rebased
   rebase-master = !bash -c 'BRANCH=$(git cb) && git co master && git rebase $BRANCH && git p' -
 [user]
   name = Bence Dányi
-  email = bence@danyi.me
 [color]
   ui = auto
 [core]
   editor = nvim
+# pager = git-split-diffs --color | less -RFX
+  pager = delta --dark
 [push]
   default = upstream
 [rebase]
-  autosqash = true
+  autosquash = true
+  autostash = true
 [branch]
   autosetuprebase = always
 [interactive]
   singlekey = true
+  diffFilter = delta --color-only --dark
+[delta]
+  line-numbers = true
+  syntax-theme = base16
+  minus-style = red normal
+  plus-style = green normal
+  zero-style = normal normal
 [advice]
   statusHints = false
   pushNonFastForward = false
-[diff]
-  renames = copies
-  mnemonicprefix = true
-  colorMoved = zebra
+#[diff]
+#  renames = copies
+#  mnemonicprefix = true
+#  colorMoved = zebra
 [difftool]
   prompt = false
 [pager]
