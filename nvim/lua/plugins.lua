@@ -51,6 +51,9 @@ local function startup()
 
   -- comment stuff out
   use {'numToStr/Comment.nvim', config = [[require('Comment').setup()]]}
+
+  -- debugger
+  use {'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'}, config = get_config('dap')}
 end
 
 require('packer').startup(startup)
