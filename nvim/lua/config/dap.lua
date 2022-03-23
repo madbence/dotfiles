@@ -4,7 +4,7 @@ function M.setup()
   local dapui = require('dapui')
   dapui.setup()
 
-  dap.adapters.node2 = {
+  dap.adapters.node = {
     type = 'executable',
     command = 'node',
     args = {os.getenv('HOME') .. '/projects/vscode-node-debug2/out/src/nodeDebug.js'},
@@ -14,7 +14,7 @@ function M.setup()
     {
       -- For this to work you need to make sure the node process is started with the `--inspect` flag.
       name = 'Attach to process',
-      type = 'node2',
+      type = 'node',
       request = 'attach',
       processId = require'dap.utils'.pick_process,
     },
@@ -29,6 +29,13 @@ function M.setup()
   dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
   end
+
+  if io.open('.vscode/launch.json') ~= nil then
+    require('dap.ext.vscode').load_launchjs(nil, { node = { 'typescript' } })
+  end
+
+  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text='👉', texthl='', linehl='CursorLineNr', numhl=''})
 
   vim.api.nvim_set_keymap('n', '<F5>', [[:lua require('dap').continue()<CR>]], { noremap = true, silent = true})
   vim.api.nvim_set_keymap('n', '<F10>', [[:lua require('dap').step_over()<CR>]], { noremap = true, silent = true})
