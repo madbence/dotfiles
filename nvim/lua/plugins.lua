@@ -47,7 +47,7 @@ local function startup()
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = [[require('gitsigns').setup()]]}
 
   -- fancy ui
-  use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}, config = [[require('telescope').setup({})]]}
+  use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-ui-select.nvim'}, config = get_config('telescope')}
 
   -- comment stuff out
   use {'numToStr/Comment.nvim', config = [[require('Comment').setup()]]}

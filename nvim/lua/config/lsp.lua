@@ -15,11 +15,11 @@ local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
   map_telescope(bufnr, 'n', 'gd', 'lsp_definitions', opts)
   map_telescope(bufnr, 'n', 'gi', 'lsp_implementations', opts)
   map_telescope(bufnr, 'n', 'gr', 'lsp_references', opts)
-  map_telescope(bufnr, 'n', '<leader>ca', 'lsp_code_actions', opts)
   map_telescope(bufnr, 'n', '<leader>so', 'lsp_document_symbols', opts)
   map_telescope(bufnr, 'n', '<leader>D', 'lsp_type_definitions', opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
