@@ -43,8 +43,10 @@ function M.setup()
         end
       end, { 'i', 's' }),
     },
-    documentation = {
-      border = 'single',
+    window = {
+      documentation = {
+        border = 'single',
+      },
     },
     experimental = {
       ghost_text = true,
