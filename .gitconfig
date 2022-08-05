@@ -4,6 +4,8 @@
   purr = pull --rebase
   p = push
   pf = push --force-with-lease
+  r = rebase
+  f = fetch
   pu = !git push -u origin $(git cb)
   lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
   co = checkout
@@ -24,6 +26,8 @@
   pager = delta --dark
 [push]
   default = upstream
+[pull]
+  rebase = true
 [rebase]
   autosquash = true
   autostash = true
