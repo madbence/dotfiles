@@ -31,7 +31,7 @@ function M.setup()
   end
 
   if io.open('.vscode/launch.json') ~= nil then
-    require('dap.ext.vscode').load_launchjs(nil, { node = { 'typescript' } })
+    pcall(function() require('dap.ext.vscode').load_launchjs(nil, { node = { 'typescript' } }) end)
   end
 
   vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
