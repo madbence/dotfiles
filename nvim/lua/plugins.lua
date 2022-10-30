@@ -26,7 +26,7 @@ local function startup()
   use {'karb94/neoscroll.nvim', config = [[require('neoscroll').setup({ easing_function='quadratic' })]]}
 
   -- statusline + tabline
-  use {'nvim-lualine/lualine.nvim', config = get_config('lualine')}
+  use {'nvim-lualine/lualine.nvim', config = get_config('lualine'), after = 'nvim-base16'}
   use {'kdheepak/tabline.nvim', config = [[require('tabline').setup({})]]}
 
   -- auto-completion
