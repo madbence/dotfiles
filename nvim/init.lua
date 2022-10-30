@@ -19,6 +19,7 @@ vim.opt.listchars = {tab = '»·', trail = '·', eol = '¬'}
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = {'80'}
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+vim.opt.mouse = {}
 
 -- keep selection after indenting
 vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true, silent = true })
