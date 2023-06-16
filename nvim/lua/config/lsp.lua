@@ -26,6 +26,10 @@ local function on_attach(client, bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 end
 
+local function format()
+  vim.lsp.buf.format()
+end
+
 function M.setup()
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   vim.diagnostic.config({ virtual_text = false })
@@ -35,7 +39,7 @@ function M.setup()
     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single'}),
   }
 
-  local servers = { 'tsserver', 'eslint', 'bashls' }
+  local servers = { 'tsserver', 'eslint', 'bashls', 'terraformls' }
   local lspconfig = require 'lspconfig'
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
@@ -44,6 +48,11 @@ function M.setup()
       on_attach = on_attach,
     })
   end
+
+  vim.api.nvim_create_autocmd({"BufWritePre"}, {
+    pattern = {"*.tf", "*.tfvars"},
+    callback = format,
+  })
 end
 
 return M
