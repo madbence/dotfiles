@@ -47,12 +47,10 @@ augroup END
 ]]
 
 -- auto save
-vim.cmd [[
-augroup auto_save
-  autocmd!
-  autocmd FocusLost * :wa
-augroup END
-]]
+vim.api.nvim_create_autocmd('FocusLost', {
+  group = vim.api.nvim_create_augroup('auto_save', {}),
+  callback = function() vim.cmd ':wa' end
+})
 
 -- auto-compile packer loader
 vim.cmd [[
