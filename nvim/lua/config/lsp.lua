@@ -16,6 +16,7 @@ local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>l', [[<cmd>lua require('lsp_lines').toggle()<CR>]], opts)
 
   map_telescope(bufnr, 'n', 'gd', 'lsp_definitions', opts)
   map_telescope(bufnr, 'n', 'gi', 'lsp_implementations', opts)
@@ -27,6 +28,7 @@ end
 
 function M.setup()
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  vim.diagnostic.config({ virtual_text = false })
 
   local handlers =  {
     ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'single'}),

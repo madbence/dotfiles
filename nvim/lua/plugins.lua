@@ -45,6 +45,11 @@ local function startup()
 
   use 'hrsh7th/cmp-nvim-lsp-signature-help'
 
+  use {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = [[require('lsp_lines').setup()]],
+  }
+
   -- mark file changes
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = [[require('gitsigns').setup()]]}
 
