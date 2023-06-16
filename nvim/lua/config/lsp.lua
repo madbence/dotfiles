@@ -23,7 +23,7 @@ local function on_attach(client, bufnr)
   map_telescope(bufnr, 'n', 'gr', 'lsp_references', opts)
   map_telescope(bufnr, 'n', '<leader>so', 'lsp_document_symbols', opts)
   map_telescope(bufnr, 'n', '<leader>D', 'lsp_type_definitions', opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 end
 
 function M.setup()
