@@ -21,6 +21,7 @@ local function startup()
 
   -- AST-aware syntax highlighting
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = get_config('treesitter')}
+  use {'nvim-treesitter/nvim-treesitter-context', config = [[require('treesitter-context').setup({})]]}
 
   -- smooth scroll for <C-d>/<C-u>/etc.
   use {'karb94/neoscroll.nvim', config = [[require('neoscroll').setup({ easing_function='quadratic' })]]}
