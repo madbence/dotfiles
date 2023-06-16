@@ -33,7 +33,7 @@ local function startup()
   use {
     'hrsh7th/nvim-cmp',
     config = get_config('completion'),
-    requires = {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip'},
+    requires = {'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-nvim-lsp-signature-help'},
   }
 
   -- LSP stuff
@@ -42,6 +42,8 @@ local function startup()
     after = {'cmp-nvim-lsp', 'nvim-cmp', 'telescope.nvim', 'plenary.nvim'},
     config = get_config('lsp'),
   }
+
+  use 'hrsh7th/cmp-nvim-lsp-signature-help'
 
   -- mark file changes
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = [[require('gitsigns').setup()]]}
