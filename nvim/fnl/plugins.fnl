@@ -79,17 +79,19 @@
     {:config true}
 
   :nvim-treesitter/nvim-treesitter
-    {:build ::TSUpdate
+    {:lazy false
+     :build ::TSUpdate
      :config (fn []
-               (local treesitter (require :nvim-treesitter.config))
-               (treesitter.setup {:ensure_installed [:bash :javascript :tsx :typescript :clojure :markdown]
-                                  :highlight {:enable true}
-                                  :indent {:enable true}
-                                  :incremental_selection {:enable true
-                                                          :keymaps {:init_selection :gnn
-                                                                    :node_incremental :grn
-                                                                    :scope_incremental :grc
-                                                                    :node_decremental :grm}}}))}
+               (local treesitter (require :nvim-treesitter))
+               (treesitter.setup {})
+               (treesitter.install [:bash :javascript :tsx :typescript :clojure :markdown :markdown_inline])
+               (vim.api.nvim_create_autocmd :FileType
+                 {:group (vim.api.nvim_create_augroup :treesitter {:clear true})
+                  :pattern [:sh :javascript :javascriptreact :typescript :typescriptreact :clojure :markdown]
+                  :callback (fn []
+                              ; Parsers may still be downloading on the first launch.
+                              (when (pcall vim.treesitter.start)
+                                (set vim.bo.indentexpr "v:lua.require'nvim-treesitter'.indentexpr()")))}))}
 
   :nvim-treesitter/nvim-treesitter-context
     {:config true}
