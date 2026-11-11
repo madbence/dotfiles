@@ -144,8 +144,8 @@
 
   :nvim-lua/plenary.nvim
 
-  ; :lewis6991/gitsigns.nvim
-  ;   {:config true}
+  :lewis6991/gitsigns.nvim
+    {:config true}
 
   :numToStr/Comment.nvim
     {:config true}
