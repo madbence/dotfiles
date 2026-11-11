@@ -113,21 +113,16 @@
   ; :saadparwaiz1/cmp_luasnip
   ; :hrsh7th/cmp-nvim-lsp-signature-help
   :ms-jpq/coq_nvim
-    {:init (fn []
-             (set vim.g.coq_settings {:auto_start :shut-up}))}
+    {:branch :coq
+     :opts {:clients {:lsp {:always_on_top [:ts_ls]}}}}
 
   ; lsp config
   :neovim/nvim-lspconfig
     {:config (fn []
-               ; (local cmp (require :cmp_nvim_lsp))
-               ; (local capabilities (cmp.default_capabilities))
-               (local coq (require :coq))
-               (local capabilities (coq.lsp_ensure_capabilities {}))
                (vim.diagnostic.config {:virtual_text false :virtual_lines false})
                (local servers [:ts_ls :eslint :fennel_ls])
                (each [_ lsp (ipairs servers)]
-                 (local config {: capabilities
-                                :on_attach on-attach
+                 (local config {:on_attach on-attach
                                 :root_markers [:package-lock.json :.git]})
                  (vim.lsp.config lsp config)
                  (vim.lsp.enable lsp)))}
