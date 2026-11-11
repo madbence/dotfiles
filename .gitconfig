@@ -1,12 +1,18 @@
 [alias]
   cb = rev-parse --abbrev-ref HEAD
   civ = commit --interactive --verbose
+  can = commit --amend -n --no-edit
+  rbm = rebase origin/main
+  rbim = rebase origin/main --interactive
+  rbc = rebase --continue
+  ai = add --interactive
   purr = pull --rebase
-  p = push
-  pf = push --force-with-lease
+  p = pull
+  pu = push
+  puf = push --force-with-lease
+  puo = !git push -u origin $(git cb)
   r = rebase
   f = fetch
-  pu = !git push -u origin $(git cb)
   lg = log --graph --date-order --all --pretty='%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(a: %ar, c: %cr) %C(bold blue)<%an>%Creset'
   co = checkout
   cob = checkout -b
@@ -22,7 +28,6 @@
   ui = auto
 [core]
   editor = nvim
-# pager = git-split-diffs --color | less -RFX
   pager = delta --dark
 [push]
   default = upstream
@@ -33,10 +38,12 @@
   autostash = true
 [branch]
   autosetuprebase = always
+  sort = committerdate
 [interactive]
   singlekey = true
   diffFilter = delta --color-only --dark
 [delta]
+  navigate = true
   line-numbers = true
   syntax-theme = base16
   minus-style = red normal
@@ -45,26 +52,9 @@
 [advice]
   statusHints = false
   pushNonFastForward = false
-#[diff]
-#  renames = copies
-#  mnemonicprefix = true
-#  colorMoved = zebra
-[difftool]
-  prompt = false
-[pager]
-  difftool = true
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-[color "diff"]
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
-[commit]
-  gpgsign = true
 [include]
   path = ~/dotfiles/local.gitconfig
+[merge]
+  conflictStyle = zdiff3
+[tag]
+  sort = version:refname
