@@ -1,0 +1,164 @@
+(macro plugins [specs]
+  (local tbl [])
+  (var i 1)
+  (while (<= i (length specs))
+    (let [curr (. specs i)
+          next (. specs (+ i 1))]
+      (case (type next)
+        (where (or :string :nil)) (do
+                                    (table.insert tbl curr)
+                                    (set i (+ i 1)))
+        _ (let [spec {1 curr}]
+            (each [k v (pairs next)]
+              (tset spec k v))
+            (set i (+ i 2))
+            (table.insert tbl spec)))))
+  tbl)
+
+(fn map-telescope [bufnr mode lhs method opts]
+  (vim.api.nvim_buf_set_keymap bufnr mode lhs
+                               (.. "<cmd>lua require('telescope.builtin')."
+                                   method "()<CR>")
+                               opts))
+(fn on-attach [client bufnr]
+  (let [opts {:noremap true :silent true}]
+    (vim.api.nvim_buf_set_keymap bufnr :n :gD
+                                 "<cmd>lua vim.lsp.buf.declaration()<CR>" opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :K "<cmd>lua vim.lsp.buf.hover()<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :L
+                                 "<cmd>lua vim.diagnostic.open_float({ scope = \"cursor\", border = \"single\" })<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<C-k>
+                                 "<cmd>lua vim.lsp.buf.signature_help()<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>wa
+                                 "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>wr
+                                 "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>wl
+                                 "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>rn
+                                 "<cmd>lua vim.lsp.buf.rename()<CR>" opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>so
+                                 "<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>"
+                                 opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>ca
+                                 "<cmd>lua vim.lsp.buf.code_action()<CR>" opts)
+    (vim.api.nvim_buf_set_keymap bufnr :n :<leader>l
+                                 "<cmd>lua require('lsp_lines').toggle()<CR>"
+                                 opts)
+    (map-telescope bufnr :n :gd :lsp_definitions opts)
+    (map-telescope bufnr :n :gi :lsp_implementations opts)
+    (map-telescope bufnr :n :gr :lsp_references opts)
+    (map-telescope bufnr :n :<leader>so :lsp_document_symbols opts)
+    (map-telescope bufnr :n :<leader>D :lsp_type_definitions opts)
+    (vim.cmd " command! Format execute 'lua vim.lsp.buf.format()' ")))
+
+(plugins [
+  :kylechui/nvim-surround
+    {:config true}
+
+  :unblevable/quick-scope
+
+  :RRethy/nvim-base16
+    {:config (fn []
+               (var theme vim.env.BASE16_THEME)
+               (when (not theme)
+                 (set theme :ocean))
+               (local color (require :base16-colorscheme))
+               (color.setup theme {:telescope false}))}
+
+  :windwp/nvim-autopairs
+    {:config true}
+
+  :nacro90/numb.nvim
+    {:config true}
+
+  :nvim-treesitter/nvim-treesitter
+    {:build ::TSUpdate
+     :config (fn []
+               (local treesitter (require :nvim-treesitter.config))
+               (treesitter.setup {:ensure_installed [:bash :javascript :tsx :typescript :clojure :markdown]
+                                  :highlight {:enable true}
+                                  :indent {:enable true}
+                                  :incremental_selection {:enable true
+                                                          :keymaps {:init_selection :gnn
+                                                                    :node_incremental :grn
+                                                                    :scope_incremental :grc
+                                                                    :node_decremental :grm}}}))}
+
+  :nvim-treesitter/nvim-treesitter-context
+    {:config true}
+
+  :karb94/neoscroll.nvim
+    {:opts {:easing_function :quadratic}}
+
+  :nvim-lualine/lualine.nvim
+    {:opts {:options {:icons_enabled false}}}
+
+  :kdheepak/tabline.nvim
+    {:config true}
+
+  ; completion plugins
+  ; :hrsh7th/cmp-nvim-lsp
+  ; :hrsh7th/nvim-cmp
+  ; :L3MON4D3/LuaSnip
+  ; :hrsh7th/cmp-buffer
+  ; :saadparwaiz1/cmp_luasnip
+  ; :hrsh7th/cmp-nvim-lsp-signature-help
+  :ms-jpq/coq_nvim
+    {:init (fn []
+             (set vim.g.coq_settings {:auto_start :shut-up}))}
+
+  ; lsp config
+  :neovim/nvim-lspconfig
+    {:config (fn []
+               ; (local cmp (require :cmp_nvim_lsp))
+               ; (local capabilities (cmp.default_capabilities))
+               (local coq (require :coq))
+               (local capabilities (coq.lsp_ensure_capabilities {}))
+               (vim.diagnostic.config {:virtual_text false})
+               (local handlers {:textDocument/hover (vim.lsp.with vim.lsp.handlers.hover {:border :single})
+                                :textDocument/signatureHelp (vim.lsp.with vim.lsp.signature_help {:border :single})})
+               (local servers [:ts_ls :eslint :fennel_ls])
+               (each [_ lsp (ipairs servers)]
+                 (local config {: capabilities
+                                : handlers
+                                :on_attach on-attach
+                                :root_markers [:package-lock.json :.git]})
+                 (vim.lsp.config lsp config)
+                 (vim.lsp.enable lsp)))}
+
+  :nvim-telescope/telescope.nvim
+    {:config (fn []
+               (local telescope (require :telescope))
+               (local builtin (require :telescope.builtin))
+               (telescope.setup {})
+               (telescope.load_extension :ui-select)
+               (vim.keymap.set :n "<leader>ff" builtin.find_files {})
+               (vim.keymap.set :n "<leader>fg" builtin.live_grep {})
+               (vim.keymap.set :n "<leader>fb" builtin.buffers {})
+               (vim.keymap.set :n "<leader>fh" builtin.help_tags {}))}
+
+  :ray-x/lsp_signature.nvim
+    {:config true}
+
+  :folke/trouble.nvim
+    {:config true}
+
+  :nvim-telescope/telescope-ui-select.nvim
+
+  :nvim-lua/plenary.nvim
+
+  ; :lewis6991/gitsigns.nvim
+  ;   {:config true}
+
+  :numToStr/Comment.nvim
+    {:config true}
+
+  :atweiden/vim-fennel
+])

@@ -1,4 +1,8 @@
-require('plugins')
+local fennel = require('fennel')
+table.insert(package.loaders or package.searchers, fennel.searcher)
+fennel.path = './?.fnl;./?/init.fnl;' .. vim.fn.stdpath('config') .. '/fnl/?.fnl'
+require('config')
+-- require('plugins')
 
 vim.g.mapleader = ','
 vim.opt.number = true
@@ -51,11 +55,3 @@ vim.api.nvim_create_autocmd('FocusLost', {
   group = vim.api.nvim_create_augroup('auto_save', {}),
   callback = function() vim.cmd ':wa' end
 })
-
--- auto-compile packer loader
-vim.cmd [[
-augroup packer_auto_compile
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-]]

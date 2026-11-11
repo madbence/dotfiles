@@ -24,6 +24,9 @@ local function on_attach(client, bufnr)
   map_telescope(bufnr, 'n', '<leader>so', 'lsp_document_symbols', opts)
   map_telescope(bufnr, 'n', '<leader>D', 'lsp_type_definitions', opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
+
+  -- vim.lsp.inlay_hint(0, true)
+  -- require('lsp-inlayhints').on_attach(client, bufnr)
 end
 
 local function format()
@@ -39,14 +42,19 @@ function M.setup()
     ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = 'single'}),
   }
 
-  local servers = { 'tsserver', 'eslint', 'bashls', 'terraformls' }
-  local lspconfig = require 'lspconfig'
-  for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup({
+  local servers = { 'ts_ls', 'eslint', 'fennel_ls' }
+  -- local lspconfig = require 'lspconfig'
+  local lspconfig = vim.lsp
+  for _,lsp in ipairs(servers) do
+    local config = {
       capabilities = capabilities,
       handlers = handlers,
       on_attach = on_attach,
-    })
+      root_markers = { 'package-lock.json', '.git' }
+    }
+
+    vim.lsp.config(lsp, config)
+    vim.lsp.enable(lsp)
   end
 
   vim.api.nvim_create_autocmd({"BufWritePre"}, {
