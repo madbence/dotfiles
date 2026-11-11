@@ -109,7 +109,7 @@
     {:version "1.*"
      :main :blink.cmp
      :opts {:keymap {:preset :super-tab}
-            :completion {:documentation {:auto-show true}}}}
+            :completion {:documentation {:auto_show true}}}}
 
   ; lsp config
   :neovim/nvim-lspconfig
