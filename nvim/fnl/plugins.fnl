@@ -105,20 +105,16 @@
   :kdheepak/tabline.nvim
     {:config true}
 
-  ; completion plugins
-  ; :hrsh7th/cmp-nvim-lsp
-  ; :hrsh7th/nvim-cmp
-  ; :L3MON4D3/LuaSnip
-  ; :hrsh7th/cmp-buffer
-  ; :saadparwaiz1/cmp_luasnip
-  ; :hrsh7th/cmp-nvim-lsp-signature-help
-  :ms-jpq/coq_nvim
-    {:branch :coq
-     :opts {:clients {:lsp {:always_on_top [:ts_ls]}}}}
+  :saghen/blink.cmp
+    {:version "1.*"
+     :main :blink.cmp
+     :opts {:keymap {:preset :super-tab}
+            :completion {:documentation {:auto-show true}}}}
 
   ; lsp config
   :neovim/nvim-lspconfig
-    {:config (fn []
+    {:dependencies [:saghen/blink.cmp]
+     :config (fn []
                (vim.diagnostic.config {:virtual_text false :virtual_lines false})
                (local servers [:ts_ls :eslint :fennel_ls])
                (each [_ lsp (ipairs servers)]
