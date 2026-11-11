@@ -24,13 +24,13 @@
   (let [opts {:noremap true :silent true}]
     (vim.api.nvim_buf_set_keymap bufnr :n :gD
                                  "<cmd>lua vim.lsp.buf.declaration()<CR>" opts)
-    (vim.api.nvim_buf_set_keymap bufnr :n :K "<cmd>lua vim.lsp.buf.hover()<CR>"
+    (vim.api.nvim_buf_set_keymap bufnr :n :K "<cmd>lua vim.lsp.buf.hover({ border = 'single' })<CR>"
                                  opts)
     (vim.api.nvim_buf_set_keymap bufnr :n :L
                                  "<cmd>lua vim.diagnostic.open_float({ scope = \"cursor\", border = \"single\" })<CR>"
                                  opts)
     (vim.api.nvim_buf_set_keymap bufnr :n :<C-k>
-                                 "<cmd>lua vim.lsp.buf.signature_help()<CR>"
+                                 "<cmd>lua vim.lsp.buf.signature_help({ border = 'single' })<CR>"
                                  opts)
     (vim.api.nvim_buf_set_keymap bufnr :n :<leader>wa
                                  "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>"
@@ -124,12 +124,9 @@
                (local coq (require :coq))
                (local capabilities (coq.lsp_ensure_capabilities {}))
                (vim.diagnostic.config {:virtual_text false})
-               (local handlers {:textDocument/hover (vim.lsp.with vim.lsp.handlers.hover {:border :single})
-                                :textDocument/signatureHelp (vim.lsp.with vim.lsp.signature_help {:border :single})})
                (local servers [:ts_ls :eslint :fennel_ls])
                (each [_ lsp (ipairs servers)]
                  (local config {: capabilities
-                                : handlers
                                 :on_attach on-attach
                                 :root_markers [:package-lock.json :.git]})
                  (vim.lsp.config lsp config)
