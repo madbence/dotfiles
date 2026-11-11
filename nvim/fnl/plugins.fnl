@@ -49,7 +49,7 @@
     (vim.api.nvim_buf_set_keymap bufnr :n :<leader>ca
                                  "<cmd>lua vim.lsp.buf.code_action()<CR>" opts)
     (vim.api.nvim_buf_set_keymap bufnr :n :<leader>l
-                                 "<cmd>lua require('lsp_lines').toggle()<CR>"
+                                 "<cmd>lua vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })<CR>"
                                  opts)
     (map-telescope bufnr :n :gd :lsp_definitions opts)
     (map-telescope bufnr :n :gi :lsp_implementations opts)
@@ -123,7 +123,7 @@
                ; (local capabilities (cmp.default_capabilities))
                (local coq (require :coq))
                (local capabilities (coq.lsp_ensure_capabilities {}))
-               (vim.diagnostic.config {:virtual_text false})
+               (vim.diagnostic.config {:virtual_text false :virtual_lines false})
                (local servers [:ts_ls :eslint :fennel_ls])
                (each [_ lsp (ipairs servers)]
                  (local config {: capabilities
