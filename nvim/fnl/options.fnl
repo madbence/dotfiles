@@ -52,5 +52,8 @@
                                                                   {:clear true})})
 
 (vim.api.nvim_create_autocmd :FocusLost
-                             {:callback (fn [] (vim.cmd ":wa"))
+                             {:callback (fn []
+                                          (vim.cmd ":wa")
+                                          ; A truthy return deletes the autocommand.
+                                          nil)
                               :group (vim.api.nvim_create_augroup :auto_save {})})
