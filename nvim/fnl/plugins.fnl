@@ -109,6 +109,7 @@
     {:version "1.*"
      :main :blink.cmp
      :opts {:keymap {:preset :super-tab}
+            :signature {:enabled true}
             :completion {:documentation {:auto_show true}}}}
 
   ; lsp config
@@ -133,9 +134,6 @@
                (vim.keymap.set :n "<leader>fg" builtin.live_grep {})
                (vim.keymap.set :n "<leader>fb" builtin.buffers {})
                (vim.keymap.set :n "<leader>fh" builtin.help_tags {}))}
-
-  :ray-x/lsp_signature.nvim
-    {:config true}
 
   :folke/trouble.nvim
     {:config true}
